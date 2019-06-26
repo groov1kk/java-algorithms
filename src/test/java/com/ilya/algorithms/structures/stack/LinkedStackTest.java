@@ -58,6 +58,6 @@ public class LinkedStackTest extends BaseTest {
     Assert.assertThat(copy.pop(), is(3));
     Assert.assertThat(copy.pop(), is(2));
     Assert.assertThat(copy.pop(), is(1));
-    Assert.assertThat(copy.size(), is(3));
+    Assert.assertThat(copy.isEmpty(), is(true));
   }
 }

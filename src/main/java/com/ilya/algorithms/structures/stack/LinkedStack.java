@@ -15,6 +15,8 @@ public class LinkedStack<E> implements Stack<E> {
   public LinkedStack(Stack<E> stack) {
     Objects.requireNonNull(stack, "Stack must not be null");
 
+    this.size = stack.size();
+
     if (!stack.isEmpty()) {
       Iterator<E> iterator = stack.iterator();
       this.node = new Node<>(iterator.next());
@@ -44,7 +46,7 @@ public class LinkedStack<E> implements Stack<E> {
 
     E element = this.node.value;
     this.node = this.node.next;
-    this.size++;
+    this.size--;
     return element;
   }
 
