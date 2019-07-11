@@ -15,12 +15,12 @@ public class BinarySearchTest extends BaseTest {
   private static final int FROM_VALUE = -50;
   private static final int TO_VALUE = 50;
 
-  private int[] array;
-  private Search search;
+  private Integer[] array;
+  private Search<Integer> search;
 
   @Before
   public void init() {
-    this.search = new BinarySearch();
+    this.search = new BinarySearch<>();
     this.array = distinctArray(ARRAY_LENGTH, FROM_VALUE, TO_VALUE);
   }
 

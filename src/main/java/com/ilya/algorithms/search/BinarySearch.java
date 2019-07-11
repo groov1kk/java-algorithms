@@ -1,18 +1,18 @@
 package com.ilya.algorithms.search;
 
-public class BinarySearch implements Search {
+public class BinarySearch<T extends Comparable<T>> implements Search<T> {
 
   @Override
-  public int rank(int[] array, int value) {
+  public int rank(T[] array, T value) {
     int low = 0;
     int high = array.length - 1;
 
     while (low <= high) {
       int middle = low + (high - low) / 2;
 
-      if (value == array[middle]) {
+      if (array[middle].compareTo(value) == 0) {
         return middle;
-      } else if (value < array[middle]) {
+      } else if (array[middle].compareTo(value) > 0) {
         high = middle - 1;
       } else {
         low = middle + 1;

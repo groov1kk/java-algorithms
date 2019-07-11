@@ -1,11 +1,11 @@
 package com.ilya.algorithms.search;
 
-public class LinearSearch implements Search {
+public class LinearSearch<T extends Comparable<T>> implements Search<T> {
 
   @Override
-  public int rank(int[] array, int value) {
+  public int rank(T[] array, T value) {
     for (int i = 0; i < array.length; i++) {
-      if (array[i] == value) {
+      if (array[i].compareTo(value) == 0) {
         return i;
       }
     }
