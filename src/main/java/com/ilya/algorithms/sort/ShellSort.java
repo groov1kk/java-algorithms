@@ -13,7 +13,7 @@ public class ShellSort implements Sort {
       h = h * 3 + 1;
     }
 
-    while (h >= 1) {
+    while (h > 0) {
       insertionSort(array, h, size);
       h = h / 3;
     }
@@ -23,7 +23,7 @@ public class ShellSort implements Sort {
   private void insertionSort(int[] array, int from, int to) {
     for (int i = from; i < to; i++) {
       int index = i;
-      while (index >= from && array[index - 1] > array[index]) {
+      while (index >= from && array[index - from] > array[index]) {
         swap(array, index, index - from);
         index = index - from;
       }

@@ -9,16 +9,17 @@ import java.util.Objects;
 public class BucketSort implements Sort {
 
   private static final int DEFAULT_BUCKET_RANGE = 10;
+  private static final Sort DEFAULT_BUCKET_SORT = new InsertionSort();
 
   private final Sort bucketSort;
   private final int bucketRange;
 
   public BucketSort() {
-    this(DEFAULT_BUCKET_RANGE, new InsertionSort());
+    this(DEFAULT_BUCKET_RANGE, DEFAULT_BUCKET_SORT);
   }
 
   public BucketSort(int bucketRange) {
-    this(bucketRange, new InsertionSort());
+    this(bucketRange, DEFAULT_BUCKET_SORT);
   }
 
   public BucketSort(int bucketRange, Sort bucketSort) {
