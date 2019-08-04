@@ -3,6 +3,7 @@ package com.ilya.algorithms.sort;
 import com.ilya.algorithms.Utils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +37,7 @@ public class BucketSort implements Sort {
     List<List<Integer>> buckets = new ArrayList<>(bucketsSize);
 
     for (int i = 0; i < bucketsSize; i++) {
-      buckets.add(new ArrayList<>());
+      buckets.add(new LinkedList<>());
     }
 
     for (int element : array) {

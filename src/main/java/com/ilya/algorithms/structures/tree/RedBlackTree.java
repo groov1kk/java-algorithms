@@ -24,6 +24,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
   @Override
   public void insert(K key, V value) {
     this.root = insert(this.root, key, value);
+    this.root.isRed = false;
   }
 
   private Node<K, V> insert(Node<K, V> node, K key, V value) {
