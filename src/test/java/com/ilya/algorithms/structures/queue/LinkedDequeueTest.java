@@ -1,6 +1,8 @@
-package com.ilya.algorithms.structures;
+package com.ilya.algorithms.structures.queue;
 
 import com.ilya.algorithms.BaseTest;
+import com.ilya.algorithms.structures.queue.Deque;
+import com.ilya.algorithms.structures.queue.LinkedDeque;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -84,29 +84,76 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
   @Override
   public void remove(K key) {
+    if (!isRed(this.root.left) && !isRed(this.root.right)) {
+      this.root.isRed = true;
+    }
+
     this.root = remove(this.root, key);
   }
 
+  @SuppressWarnings("unchecked")
   private Node<K, V> remove(Node<K, V> node, K key) {
     if (node == null) {
       return null;
     }
 
-    if (node.key.compareTo(key) > 0) {
+    if (key.compareTo(node.key) < 0) {
+      if (!isRed(node.left) && !isRed(node.left.left)) {
+        node = moveRedLeft(node);
+      }
       node.left = remove(node.left, key);
-    } else if (node.key.compareTo(key) < 0) {
-      node.right = remove(node.right, key);
     } else {
-      if (node.right == null) {
-        return node.left;
-      } else if (node.left == null) {
-        return node.right;
+      if (isRed(node.left)) {
+        node = rotateRight(node);
       }
 
-      Node<K, V> temp = node;
-      node = min(temp.right);
-      node.right = removeMin(temp.right);
-      node.left = temp.left;
+      if (key.compareTo(node.key) == 0 && (node.right == null)) {
+        return null;
+      }
+
+      if (!isRed(node.right) && !isRed(node.right.left)) {
+        node = moveRedRight(node);
+      }
+
+      if (key.compareTo(node.key) == 0) {
+        Node min = min(node.right);
+        node.key = (K) min.key;
+        node.value = (V) min.value;
+        node.right = removeMin(node.right);
+      } else {
+        node.right = remove(node.right, key);
+      }
+    }
+
+    if (isRed(node.right)) {
+      node = rotateLeft(node);
+    }
+
+    if (isRed(node.left) && isRed(node.left.left)) {
+      node = rotateRight(node);
+    }
+
+    if (isRed(node.left) && isRed(node.right)) {
+      flipColors(node);
+    }
+    return node;
+  }
+
+  private Node<K, V> moveRedRight(Node<K, V> node) {
+    flipColors(node);
+    if (isRed(node.left.left)) {
+      node = rotateRight(node);
+      flipColors(node);
+    }
+    return node;
+  }
+
+  private Node<K, V> moveRedLeft(Node<K, V> node) {
+    flipColors(node);
+    if (isRed(node.left.left)) {
+      node.right = rotateRight(node.right);
+      node = rotateLeft(node);
+      flipColors(node);
     }
     return node;
   }
@@ -165,6 +212,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
     private Node<K, V> left;
     private Node<K, V> right;
+
     private boolean isRed;
 
     private Node(K key, V value, boolean isRed) {

@@ -1,4 +1,4 @@
-package com.ilya.algorithms.structures;
+package com.ilya.algorithms.structures.queue;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;

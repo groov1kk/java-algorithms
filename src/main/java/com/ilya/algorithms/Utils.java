@@ -2,6 +2,7 @@ package com.ilya.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,6 +18,8 @@ public final class Utils {
    * @param right An index of right element to swap in a given array
    */
   public static void swap(int[] array, int left, int right) {
+    Objects.requireNonNull(array, "Array must not be null");
+
     int temp = array[left];
     array[left] = array[right];
     array[right] = temp;
@@ -30,6 +33,8 @@ public final class Utils {
    * @param right An index of right element to swap in a given array
    */
   public static <E> void swap(E[] array, int left, int right) {
+    Objects.requireNonNull(array, "Array must not be null");
+
     E temp = array[left];
     array[left] = array[right];
     array[right] = temp;
@@ -42,6 +47,8 @@ public final class Utils {
    * @return Is array sorted in ascending order
    */
   public static boolean isSortedAsc(int[] array) {
+    Objects.requireNonNull(array, "Array must not be null");
+
     for (int i = 0; i < array.length - 1; i++) {
       if (array[i] > array[i + 1]) {
         return false;
@@ -57,6 +64,8 @@ public final class Utils {
    * @return Minimum element
    */
   public static int min(int[] array) {
+    Objects.requireNonNull(array, "Array must not be null");
+
     int min = array[0];
 
     for (int i = 1; i < array.length; i++) {
@@ -74,6 +83,8 @@ public final class Utils {
    * @return Maximum element
    */
   public static int max(int[] array) {
+    Objects.requireNonNull(array, "Array must not be null");
+
     int max = array[0];
 
     for (int i = 1; i < array.length; i++) {
@@ -124,6 +135,8 @@ public final class Utils {
    * @param array Array to shuffle elements
    */
   public static int[] shuffle(int[] array) {
+    Objects.requireNonNull(array, "Array must not be null");
+
     Random random = ThreadLocalRandom.current();
     for (int i = 0; i < array.length; i++) {
       swap(array, i, random.nextInt(i + 1));
