@@ -2,6 +2,13 @@ package com.ilya.algorithms.sort;
 
 import static com.ilya.algorithms.Utils.swap;
 
+/**
+ * Bubble sort algorithm.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n^2).
+ */
 public class BubbleSort implements Sort {
 
   @Override

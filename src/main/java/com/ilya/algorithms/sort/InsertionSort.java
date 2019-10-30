@@ -1,5 +1,12 @@
 package com.ilya.algorithms.sort;
 
+/**
+ * Heap sort algorithm.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n^2).
+ */
 public class InsertionSort implements Sort {
 
   @Override

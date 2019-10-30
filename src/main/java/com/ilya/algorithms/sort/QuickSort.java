@@ -2,6 +2,16 @@ package com.ilya.algorithms.sort;
 
 import static com.ilya.algorithms.Utils.swap;
 
+/**
+ * Quick sort algorithm. Uses Hoare partition scheme.
+ *
+ * <p>This implementation tries to get a <b>middle</b> element of the given array and it's
+ * sub-arrays on each iterations as pivot element.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*log(n)).
+ */
 public class QuickSort implements Sort {
 
   @Override

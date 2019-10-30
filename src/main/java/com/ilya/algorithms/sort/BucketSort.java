@@ -7,6 +7,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Bucket sort algorithm. This implementation provides to set bucket range and algorithm for buckets
+ * sorting. By default it uses <b>Insertion sort</b>.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*m).
+ *
+ * @see #DEFAULT_BUCKET_RANGE
+ * @see #DEFAULT_BUCKET_SORT
+ */
 public class BucketSort implements Sort {
 
   private static final int DEFAULT_BUCKET_RANGE = 10;
@@ -48,7 +59,7 @@ public class BucketSort implements Sort {
     for (List<Integer> bucket : buckets) {
       int[] ints = bucket.stream().mapToInt(x -> x).toArray();
       for (int i : this.bucketSort.sort(ints)) {
-        array[k++] = i + min;
+        array[k++] = i;
       }
     }
     return array;

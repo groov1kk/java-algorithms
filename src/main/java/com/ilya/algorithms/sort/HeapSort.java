@@ -2,6 +2,13 @@ package com.ilya.algorithms.sort;
 
 import static com.ilya.algorithms.Utils.swap;
 
+/**
+ * Heap sort algorithm.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*log(n)).
+ */
 public class HeapSort implements Sort {
 
   @Override

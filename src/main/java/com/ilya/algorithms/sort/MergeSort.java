@@ -2,6 +2,13 @@ package com.ilya.algorithms.sort;
 
 import java.util.Objects;
 
+/**
+ * Merge sort algorithm. Uses only one additional auxiliary array.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*log(n)). Memory consumption is O(n).
+ */
 public class MergeSort implements Sort {
 
   @Override

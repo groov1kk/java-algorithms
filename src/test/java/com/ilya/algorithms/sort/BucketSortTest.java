@@ -16,7 +16,10 @@ public class BucketSortTest extends BaseSortTest {
     int bucketRange = 20;
 
     Sort sort = new BucketSort(bucketRange);
-    Assert.assertThat(sort.sort(array), isSortedAsc());
+    int[] sorted = sort.sort(array.clone());
+
+    Assert.assertThat(sorted, isSortedAsc());
+    Assert.assertThat(array, hasSameItemsInAnyOrder(sorted));
   }
 
   @Test
@@ -25,6 +28,9 @@ public class BucketSortTest extends BaseSortTest {
     Sort bucketSort = new BubbleSort();
 
     Sort sort = new BucketSort(bucketRange, bucketSort);
-    Assert.assertThat(sort.sort(array), isSortedAsc());
+    int[] sorted = sort.sort(array.clone());
+
+    Assert.assertThat(sorted, isSortedAsc());
+    Assert.assertThat(array, hasSameItemsInAnyOrder(sorted));
   }
 }

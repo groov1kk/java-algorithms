@@ -2,6 +2,13 @@ package com.ilya.algorithms.sort;
 
 import com.ilya.algorithms.Utils;
 
+/**
+ * Counting sort algorithm.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*m).
+ */
 public class CountingSort implements Sort {
 
   @Override
