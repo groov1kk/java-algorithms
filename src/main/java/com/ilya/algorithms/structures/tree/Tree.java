@@ -1,7 +1,5 @@
 package com.ilya.algorithms.structures.tree;
 
-import java.util.Iterator;
-
 public interface Tree<K extends Comparable<K>, V> {
 
   V find(K key);

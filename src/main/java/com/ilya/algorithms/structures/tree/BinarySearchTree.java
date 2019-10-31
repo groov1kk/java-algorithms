@@ -3,7 +3,7 @@ package com.ilya.algorithms.structures.tree;
 import com.ilya.algorithms.structures.queue.ArrayQueue;
 import com.ilya.algorithms.structures.queue.Queue;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
@@ -87,35 +87,39 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     return temp;
   }
 
-  private void traverse(Node<K, V> node, Consumer<Node<K, V>> visitor) {
+  public void traverse(BiConsumer<K, V> visitor) {
+    traverse(this.root, visitor);
+  }
+
+  private void traverse(Node<K, V> node, BiConsumer<K, V> visitor) {
     if (node == null) {
       return;
     }
 
     traverse(node.left, visitor);
-    visitor.accept(node);
+    visitor.accept(node.key, node.value);
     traverse(node.right, visitor);
   }
 
   @Override
   public Iterable<K> keys() {
     Queue<K> queue = new ArrayQueue<>();
-    traverse(this.root, x -> queue.enqueue(x.key));
+    traverse((key, value) -> queue.enqueue(key));
     return queue;
   }
 
   @Override
   public Iterable<V> values() {
     Queue<V> queue = new ArrayQueue<>();
-    traverse(this.root, x -> queue.enqueue(x.value));
+    traverse((key, value) -> queue.enqueue(value));
     return queue;
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder("[");
-    traverse(this.root, builder::append);
-    return builder.append("]").toString();
+    traverse((key, value) -> builder.append(String.format("[%s=%s], ", key, value)));
+    return builder.replace(builder.length() - 2, builder.length(), "]").toString();
   }
 
   private static class Node<K, V> {

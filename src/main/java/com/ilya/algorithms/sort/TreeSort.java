@@ -3,6 +3,17 @@ package com.ilya.algorithms.sort;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
+/**
+ * Tree sort algorithm. Transforms the array into a binary search tree and then updates this array
+ * with values that are extracted from the tree's nodes by traversing it using In-order (LNR).
+ *
+ * <p>This sort does not use {@link com.ilya.algorithms.structures.tree.BinarySearchTree} because
+ * array may contain repeated elements.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*log(n)).
+ */
 public class TreeSort implements Sort {
 
   @Override
@@ -17,6 +28,7 @@ public class TreeSort implements Sort {
   private static class Tree {
 
     private int value;
+
     private Tree left;
     private Tree right;
 

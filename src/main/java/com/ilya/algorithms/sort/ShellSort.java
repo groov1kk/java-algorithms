@@ -2,6 +2,13 @@ package com.ilya.algorithms.sort;
 
 import static com.ilya.algorithms.Utils.swap;
 
+/**
+ * Shell sort algorithm. Uses Pratt's and Knuth's gap sequence.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n^(3/2)).
+ */
 public class ShellSort implements Sort {
 
   @Override

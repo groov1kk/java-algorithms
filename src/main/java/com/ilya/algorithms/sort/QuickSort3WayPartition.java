@@ -1,7 +1,17 @@
 package com.ilya.algorithms.sort;
 
-import static com.ilya.algorithms.Utils.swap;
+import com.ilya.algorithms.common.DutchFlag;
 
+/**
+ * Quick sort algorithm. Uses Dutch National Flag problem for array partition.
+ *
+ * <p>This implementation works faster than {@link QuickSort} when a given array contains a lot of
+ * repeated elements.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n*log(n)).
+ */
 public class QuickSort3WayPartition implements Sort {
 
   @Override
@@ -14,25 +24,10 @@ public class QuickSort3WayPartition implements Sort {
       return array;
     }
 
-    int low = left;
-    int mid = left;
-    int high = right;
+    DutchFlag flag = DutchFlag.rearrange(array, array[left], left, right);
 
-    int pivot = array[left];
-
-    // Dutch national flag problem
-    while (mid <= high) {
-      if (array[mid] < pivot) {
-        swap(array, low++, mid++);
-      } else if (array[mid] > pivot) {
-        swap(array, mid, high--);
-      } else {
-        mid++;
-      }
-    }
-
-    sort(array, left, low - 1);
-    sort(array, high + 1, right);
+    sort(array, left, flag.lowBorder());
+    sort(array, flag.highBorder(), right);
     return array;
   }
 }

@@ -11,30 +11,34 @@ import java.util.Collection;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(Parameterized.class)
-public class DutchFlagProblemTest {
-
-  private final DutchFlagProblem dutchFlag = new DutchFlagProblem();
+public class DutchFlagTest {
 
   private final int[] array;
   private final int[] expected;
 
-  public DutchFlagProblemTest(int[] array, int[] expected) {
+  private final int mid;
+
+  public DutchFlagTest(int[] array, int[] expected, int mid) {
     this.array = array;
     this.expected = expected;
+    this.mid = mid;
   }
 
   @Test
   public void testDutchFlagProblem() {
-    Assert.assertThat(this.dutchFlag.partition(this.array), is(this.expected));
+    DutchFlag flag = DutchFlag.rearrange(this.array, this.mid);
+
+    Assert.assertThat(flag.getArray(), is(this.expected));
+    Assert.assertThat(flag.middle(), is(this.mid));
   }
 
   @Parameterized.Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(
         new Object[][] {
-          {new int[] {1, 0, 2}, new int[] {0, 1, 2}},
-          {new int[] {2, 1, 1, 0, 2}, new int[] {0, 1, 1, 2, 2}},
-          {new int[] {0, 0, 0, 2, 1}, new int[] {0, 0, 0, 1, 2}}
+          {new int[] {1, 0, 2}, new int[] {0, 1, 2}, 1},
+          {new int[] {2, 1, 1, 0, 2}, new int[] {0, 1, 1, 2, 2}, 1},
+          {new int[] {0, 0, 0, 2, 1}, new int[] {0, 0, 0, 1, 2}, 1}
         });
   }
 }

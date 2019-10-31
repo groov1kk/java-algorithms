@@ -2,6 +2,13 @@ package com.ilya.algorithms.sort;
 
 import static com.ilya.algorithms.Utils.swap;
 
+/**
+ * Shaker sort algorithm.
+ *
+ * <p>Sorts in ascending order.
+ *
+ * <p>Time complexity is O(n^2).
+ */
 public class ShakerSort implements Sort {
 
   @Override
