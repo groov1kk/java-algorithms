@@ -135,6 +135,7 @@ public final class DutchFlag {
         + this.low
         + ", "
         + "High border: "
-        + this.high;
+        + this.high
+        + "]";
   }
 }

@@ -1,5 +1,10 @@
 package com.ilya.algorithms.common;
 
+/**
+ * Iterative implementation of fibonacci algorithm.
+ *
+ * <p>Time complexity is O(n).
+ */
 public final class Fibonacci {
 
   public int fibonacci(int n) {

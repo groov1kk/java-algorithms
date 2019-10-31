@@ -3,7 +3,7 @@ package com.ilya.algorithms.common;
 /**
  * <a href="https://en.wikipedia.org/wiki/Box_blur">Box blur algorithm</a> implementation.
  *
- * <p>Applicable for images with delMin pixel size 3x3.
+ * <p>Applicable for images with min pixel size 3x3.
  */
 public final class BoxBlurAlgorithm {
 
