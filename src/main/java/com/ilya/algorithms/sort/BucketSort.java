@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Bucket sort algorithm. This implementation provides to set bucket range and algorithm for buckets
+ * Bucket sort algorithm. This implementation provides to set simple sort algorithm for the buckets
  * sorting. By default it uses <b>Insertion sort</b>.
+ *
+ * <p>Bucket range also could be provided via constructor. Buckets size calculates dynamically
+ * according to min and max elements of array values.
  *
  * <p>Sorts in ascending order.
  *
@@ -57,9 +60,11 @@ public class BucketSort implements Sort {
 
     int k = 0;
     for (List<Integer> bucket : buckets) {
-      int[] ints = bucket.stream().mapToInt(x -> x).toArray();
-      for (int i : this.bucketSort.sort(ints)) {
-        array[k++] = i;
+      if (bucket.size() > 0) {
+        int[] ints = bucket.stream().mapToInt(x -> x).toArray();
+        for (int i : this.bucketSort.sort(ints)) {
+          array[k++] = i;
+        }
       }
     }
     return array;

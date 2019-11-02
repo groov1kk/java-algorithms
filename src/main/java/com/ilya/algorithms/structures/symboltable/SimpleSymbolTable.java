@@ -1,4 +1,4 @@
-package com.ilya.algorithms.structures.symboltables;
+package com.ilya.algorithms.structures.symboltable;
 
 import com.ilya.algorithms.structures.queue.ArrayQueue;
 import com.ilya.algorithms.structures.queue.Queue;

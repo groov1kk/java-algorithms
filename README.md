@@ -1,3 +1,3 @@
 # java-algorithms
 
-Basic Java algorithms and data structures
+Basic Java algorithms and data structures.

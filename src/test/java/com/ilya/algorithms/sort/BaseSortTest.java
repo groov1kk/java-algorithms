@@ -27,7 +27,7 @@ abstract class BaseSortTest extends BaseTest {
    * @return matcher that verifies ascending order of elements of an array
    */
   Matcher<int[]> isSortedAsc() {
-    return new BaseMatcher<int[]>() {
+    return new BaseMatcher<>() {
 
       static final String DESCRIPTION = "Array has to be sorted in ascending order";
       static final String MISMATCH = "Array %s is not sorted in ascending order";
@@ -57,7 +57,7 @@ abstract class BaseSortTest extends BaseTest {
    * @return Matcher that verifies whether two arrays have the same elements in any order
    */
   Matcher<int[]> hasSameItemsInAnyOrder(int[] expected) {
-    return new BaseMatcher<int[]>() {
+    return new BaseMatcher<>() {
 
       static final String DESCRIPTION = "Arrays have to have the same elements in any order";
       static final String MISMATCH = "Arrays do not have the same elements\n";

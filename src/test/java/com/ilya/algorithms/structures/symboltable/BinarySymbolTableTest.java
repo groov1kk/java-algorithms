@@ -1,4 +1,4 @@
-package com.ilya.algorithms.structures.symboltables;
+package com.ilya.algorithms.structures.symboltable;
 
 import org.junit.Assert;
 import org.junit.Test;

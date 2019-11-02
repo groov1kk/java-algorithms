@@ -3,14 +3,14 @@ package com.ilya.algorithms.sort;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class CountingSortTest extends BaseSortTest {
+public class RadixSortTest extends BaseSortTest {
 
   @Test
-  public void testCountingSort() {
+  public void testRadixSort() {
     int[] clone = array.clone();
 
-    Sort sort = new CountingSort();
-    sort.sort(array);
+    Sort radixSort = new RadixSort();
+    radixSort.sort(array);
 
     Assert.assertThat(array, hasSameItemsInAnyOrder(clone));
     Assert.assertThat(array, isSortedAsc());

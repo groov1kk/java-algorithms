@@ -1,6 +1,6 @@
 package com.ilya.algorithms.sort;
 
-/** Sort algorithm for integer arrays. */
+/** Strategy interface for sorting algorithms for integer arrays. */
 public interface Sort {
 
   /**

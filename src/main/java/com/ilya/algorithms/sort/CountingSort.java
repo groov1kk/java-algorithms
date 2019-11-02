@@ -3,11 +3,11 @@ package com.ilya.algorithms.sort;
 import com.ilya.algorithms.Utils;
 
 /**
- * Counting sort algorithm.
+ * Counting sort algorithm. Stable implementation. Requires additional auxiliary array.
  *
  * <p>Sorts in ascending order.
  *
- * <p>Time complexity is O(n*m).
+ * <p>Time complexity is O(n+m). Memory consumption is O(n + m).
  */
 public class CountingSort implements Sort {
 
@@ -22,12 +22,16 @@ public class CountingSort implements Sort {
       counts[element - min]++;
     }
 
-    int k = 0;
-    for (int i = 0; i < counts.length; i++) {
-      for (int j = 0; j < counts[i]; j++) {
-        array[k++] = i + min;
-      }
+    for (int i = 1; i < counts.length; i++) {
+      counts[i] = counts[i] + counts[i - 1];
     }
+
+    int[] aux = new int[array.length];
+    for (int i = array.length - 1; i >= 0; i--) {
+      aux[--counts[array[i] - min]] = array[i];
+    }
+
+    System.arraycopy(aux, 0, array, 0, array.length);
     return array;
   }
 }
