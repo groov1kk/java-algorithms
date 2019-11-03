@@ -73,7 +73,7 @@ public class BinarySymbolTable<K extends Comparable<K>, V> implements SymbolTabl
   }
 
   @Override
-  public void delete(K key) {
+  public void remove(K key) {
     if (isEmpty()) {
       return;
     }

@@ -8,6 +8,14 @@ import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.Objects;
 
+/**
+ * Simple implementation of symbol table. Uses linked list to store it's data.
+ *
+ * <p>Read, write and remove operations have O(n) average time complexity.
+ *
+ * @param <K> Key type
+ * @param <V> Value type
+ */
 @NotThreadSafe
 public class SimpleSymbolTable<K, V> implements SymbolTable<K, V> {
 
@@ -41,7 +49,7 @@ public class SimpleSymbolTable<K, V> implements SymbolTable<K, V> {
   }
 
   @Override
-  public void delete(K key) {
+  public void remove(K key) {
     if (this.first == null) {
       return;
     }

@@ -1,12 +1,18 @@
 package com.ilya.algorithms.structures.symboltable;
 
+/**
+ * Associated data structure which stores it's data as key-value pair.
+ *
+ * @param <K> Key type
+ * @param <V> Value type
+ */
 public interface SymbolTable<K, V> {
 
   V get(K key);
 
   void put(K key, V value);
 
-  void delete(K key);
+  void remove(K key);
 
   boolean isEmpty();
 

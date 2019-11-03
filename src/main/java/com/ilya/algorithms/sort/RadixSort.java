@@ -3,7 +3,9 @@ package com.ilya.algorithms.sort;
 import com.ilya.algorithms.Utils;
 
 /**
- * Radix sort algorithm. Uses LSD implementation. Applies both positive and negative decimal
+ * Radix sort algorithm. Uses LSD implementation.
+ *
+ * <p>This implementation of algorithm is applicable for both positive and negative decimal
  * integers.
  *
  * <p>Sorts in ascending order.
@@ -24,13 +26,13 @@ public class RadixSort implements Sort {
 
     int exponent = 1;
     while ((max - min) / exponent > 0) {
-      countingSort(array, aux, exponent, min, max);
+      countingSort(array, aux, exponent, min);
       exponent = exponent * RADIX;
     }
     return array;
   }
 
-  private void countingSort(int[] array, int[] aux, int exponent, int min, int max) {
+  private void countingSort(int[] array, int[] aux, int exponent, int min) {
     int[] counts = new int[RADIX];
 
     for (int element : array) {

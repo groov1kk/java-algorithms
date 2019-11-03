@@ -39,7 +39,7 @@ public class SimpleSymbolTableTest {
     symbolTable.put("three", 3);
     Assert.assertThat(symbolTable.size(), is(3));
 
-    symbolTable.delete("two");
+    symbolTable.remove("two");
     Assert.assertThat(symbolTable.size(), is(2));
     Assert.assertThat(symbolTable.get("two"), nullValue());
     Assert.assertThat(symbolTable.keys(), hasItems("one", "three"));

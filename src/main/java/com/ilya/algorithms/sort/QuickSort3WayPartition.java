@@ -11,6 +11,8 @@ import com.ilya.algorithms.common.DutchFlag;
  * <p>Sorts in ascending order.
  *
  * <p>Time complexity is O(n*log(n)).
+ *
+ * @see DutchFlag
  */
 public class QuickSort3WayPartition implements Sort {
 
@@ -20,14 +22,11 @@ public class QuickSort3WayPartition implements Sort {
   }
 
   private int[] sort(int[] array, int left, int right) {
-    if (left >= right) {
-      return array;
+    if (left < right) {
+      DutchFlag flag = DutchFlag.rearrange(array, array[left], left, right);
+      sort(array, left, flag.lowBorder());
+      sort(array, flag.highBorder(), right);
     }
-
-    DutchFlag flag = DutchFlag.rearrange(array, array[left], left, right);
-
-    sort(array, left, flag.lowBorder());
-    sort(array, flag.highBorder(), right);
     return array;
   }
 }

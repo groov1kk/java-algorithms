@@ -39,7 +39,7 @@ public class BinarySymbolTableTest {
     symbolTable.put("three", 3);
     Assert.assertThat(symbolTable.size(), is(3));
 
-    symbolTable.delete("three");
+    symbolTable.remove("three");
     Assert.assertThat(symbolTable.size(), is(2));
     Assert.assertThat(symbolTable.get("three"), nullValue());
     Assert.assertThat(symbolTable.keys(), hasItems("one", "two"));
