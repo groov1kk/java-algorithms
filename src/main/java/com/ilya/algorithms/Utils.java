@@ -1,9 +1,6 @@
 package com.ilya.algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Utils {
@@ -58,7 +55,7 @@ public final class Utils {
   }
 
   /**
-   * Returns an element with the minimum value from a given array.
+   * Returns an element with the minimum value from the given array.
    *
    * @param array Array to find minimum element
    * @return Minimum element
@@ -77,7 +74,7 @@ public final class Utils {
   }
 
   /**
-   * Returns an element with the maximum value from a given array.
+   * Returns an element with the maximum value from the given array.
    *
    * @param array Array to find maximum element
    * @return Maximum element
@@ -120,7 +117,7 @@ public final class Utils {
       counts[i - min]--;
     }
 
-    List<Integer> result = new ArrayList<>();
+    List<Integer> result = new LinkedList<>();
     for (int i = 0; i < counts.length; i++) {
       if (counts[i] < 0) {
         result.add(i + min);

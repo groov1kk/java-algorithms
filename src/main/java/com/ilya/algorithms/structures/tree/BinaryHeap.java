@@ -1,38 +1,65 @@
 package com.ilya.algorithms.structures.tree;
 
 import javax.annotation.Nonnegative;
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
-import static com.ilya.algorithms.Utils.swap;
-
+/**
+ * <a href="https://en.wikipedia.org/wiki/Binary_heap">Binary heap</a> abstract type.
+ *
+ * <p>This abstract class can be used to implement both max-heap and min-heap.
+ *
+ * @param <E> Elements type
+ */
 public abstract class BinaryHeap<E extends Comparable<E>> implements Iterable<E> {
 
-  private static final int DEFAULT_CAPACITY = 10;
+  public static final int DEFAULT_CAPACITY = 10;
 
   protected E[] array;
   protected int cursor;
 
+  /**
+   * Creates an empty binary heap with the default capacity.
+   *
+   * @see #DEFAULT_CAPACITY
+   */
   public BinaryHeap() {
     this(DEFAULT_CAPACITY);
   }
 
+  /**
+   * Creates an empty binary heap with a specific {@code capacity}.
+   *
+   * @param capacity Binary heap capacity
+   */
   public BinaryHeap(int capacity) {
     @SuppressWarnings("unchecked")
     E[] localArray = (E[]) new Comparable[capacity];
     this.array = localArray;
   }
 
+  /**
+   * Creates a binary heap from specific {@code array}.
+   *
+   * @param array Array which will be transformed into binary heap
+   * @see #buildHeap(int)
+   */
   public BinaryHeap(E[] array) {
     this.array = array;
     this.cursor = this.array.length;
     buildHeap(this.cursor - 1);
   }
 
+  /**
+   * Inserts a new {@code element} into binary heap.
+   *
+   * <p>To save heap structure after each insertion this method uses {@link #increaseKey(int)}
+   * method.
+   *
+   * @param element Element to insert
+   * @see #increaseKey(int)
+   */
   public void add(E element) {
     Objects.requireNonNull(element, "Element must not be null");
 
@@ -44,52 +71,53 @@ public abstract class BinaryHeap<E extends Comparable<E>> implements Iterable<E>
     increaseKey(this.cursor++);
   }
 
+  /**
+   * Builds a binary heap of specific size. Heap type depends on implementation of {@link
+   * #heapify(int, int)} method.
+   *
+   * @param size Heap size
+   * @see #heapify(int, int)
+   */
   private void buildHeap(int size) {
     for (int i = size / 2; i >= 0; i--) {
       heapify(i, size);
     }
   }
 
+  /**
+   * Resize heap's capacity according to {@code newSize}.
+   *
+   * @param newSize Heap new size
+   */
   protected final void resize(@Nonnegative int newSize) {
     this.array = Arrays.copyOf(this.array, newSize);
   }
 
+  /**
+   * Returns a current size of the binary heap.
+   *
+   * @return heap size
+   */
   public final int size() {
     return this.cursor;
   }
 
-  @Nullable
-  public E sample() {
-    if (this.cursor == 0) {
-      return null;
-    }
-
-    Random random = ThreadLocalRandom.current();
-    return this.array[random.nextInt(this.cursor)];
-  }
-
-  @Nullable
-  public E delRandom() {
-    if (this.cursor == 0) {
-      return null;
-    }
-
-    Random random = ThreadLocalRandom.current();
-    int index = random.nextInt(this.cursor);
-
-    E result = this.array[index];
-    swap(this.array, index, --this.cursor);
-    this.array[this.cursor] = null;
-    heapify(index, this.cursor - 1);
-
-    if (this.cursor <= this.array.length / 4) {
-      resize(this.array.length / 2);
-    }
-    return result;
-  }
-
+  /**
+   * Rearranges array elements starting from the specific {@code index} to match heap order.
+   * Depending on implementation, this method can rearrange elements to match min-heap order or
+   * max-heap order.
+   *
+   * @param index Index of array to start create heap.
+   * @param size Binary heap size
+   */
   protected abstract void heapify(int index, int size);
 
+  /**
+   * Updating a key within max-heap or min-heap. This method is used to save the heap structure
+   * order after insertion operation.
+   *
+   * @param index Index of key in array
+   */
   protected abstract void increaseKey(int index);
 
   @Override

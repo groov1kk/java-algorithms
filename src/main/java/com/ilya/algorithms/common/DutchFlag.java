@@ -13,10 +13,8 @@ import static com.ilya.algorithms.Utils.swap;
 public final class DutchFlag {
 
   private final int[] array;
-
   private final int low;
   private final int high;
-
   private final int mid;
 
   private DutchFlag(int[] array, int mid, int low, int high) {
