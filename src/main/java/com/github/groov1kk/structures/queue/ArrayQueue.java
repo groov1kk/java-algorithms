@@ -1,5 +1,8 @@
 package com.github.groov1kk.structures.queue;
 
+import com.github.groov1kk.Checker;
+
+import javax.annotation.Nonnegative;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.Objects;
@@ -19,7 +22,9 @@ public class ArrayQueue<E> implements Queue<E> {
     this(DEFAULT_CAPACITY);
   }
 
-  public ArrayQueue(int capacity) {
+  public ArrayQueue(@Nonnegative int capacity) {
+    Checker.requireNonNegative(capacity, "Capacity must not be negative");
+
     @SuppressWarnings("unchecked")
     E[] array = (E[]) new Object[capacity];
     this.array = array;
@@ -38,8 +43,8 @@ public class ArrayQueue<E> implements Queue<E> {
   }
 
   @SafeVarargs
-  public static <E> Queue<E> of(E... elements) {
-    Queue<E> queue = new ArrayQueue<>();
+  public static <E> ArrayQueue<E> of(E... elements) {
+    ArrayQueue<E> queue = new ArrayQueue<>();
     queue.enqueueAll(elements);
     return queue;
   }

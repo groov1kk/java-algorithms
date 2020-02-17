@@ -11,14 +11,14 @@ import java.util.Collection;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(Parameterized.class)
-public class BoxBlurAlgorithmTest {
+public class BoxBlurTest {
 
-  private final BoxBlurAlgorithm blurAlgorithm = new BoxBlurAlgorithm();
+  private final BoxBlur blurAlgorithm = new BoxBlur();
 
   private final int[][] actual;
   private final int[][] expected;
 
-  public BoxBlurAlgorithmTest(int[][] actual, int[][] expected) {
+  public BoxBlurTest(int[][] actual, int[][] expected) {
     this.actual = actual;
     this.expected = expected;
   }

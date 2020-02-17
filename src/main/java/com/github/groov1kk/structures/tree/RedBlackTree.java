@@ -116,9 +116,9 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
       }
 
       if (key.compareTo(node.key) == 0) {
-        Node min = min(node.right);
-        node.key = (K) min.key;
-        node.value = (V) min.value;
+        Node<K, V> min = min(node.right);
+        node.key = min.key;
+        node.value = min.value;
         node.right = removeMin(node.right);
       } else {
         node.right = remove(node.right, key);

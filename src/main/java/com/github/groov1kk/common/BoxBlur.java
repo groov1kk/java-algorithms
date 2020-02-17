@@ -5,7 +5,7 @@ package com.github.groov1kk.common;
  *
  * <p>Applicable for images with min pixel size 3x3.
  */
-public final class BoxBlurAlgorithm {
+public final class BoxBlur {
 
   private static final int PIXEL_SIZE = 3;
 

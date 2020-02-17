@@ -1,7 +1,7 @@
 package com.github.groov1kk.sort;
 
 /**
- * Heap sort algorithm.
+ * Insertion sort algorithm.
  *
  * <p>Sorts in ascending order.
  *

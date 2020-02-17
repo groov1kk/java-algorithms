@@ -22,8 +22,14 @@ public class HeapSort implements Sort {
     return array;
   }
 
+  /**
+   * Builds max binary heap by rearranging elements in the given array in specific order.
+   *
+   * @param array Array to rearrange
+   * @param size Array size
+   */
   private void buildMaxHeap(int[] array, int size) {
-    for (int i = (int) (Math.round((double) size / 2) - 1); i >= 0; i--) {
+    for (int i = (int) (Math.floor((double) size / 2)); i >= 0; i--) {
       heapifyMax(array, i, size);
     }
   }

@@ -5,7 +5,7 @@ import com.github.groov1kk.Utils;
 /**
  * Radix sort algorithm. Uses LSD implementation.
  *
- * <p>This implementation of algorithm is applicable for both positive and negative decimal
+ * <p>This implementation of Radix sort algorithm can be used both for positive and negative decimal
  * integers.
  *
  * <p>Sorts in ascending order.

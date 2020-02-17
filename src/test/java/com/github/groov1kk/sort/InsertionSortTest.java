@@ -7,12 +7,12 @@ public class InsertionSortTest extends BaseSortTest {
 
   @Test
   public void testInsertionSort() {
-    Sort sort = new InsertionSort();
     int[] copy = array.clone();
 
+    Sort sort = new InsertionSort();
     sort.sort(array);
 
-    Assert.assertThat(array, hasSameItemsInAnyOrder(copy));
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(copy));
     Assert.assertThat(array, isSortedAsc());
   }
 }

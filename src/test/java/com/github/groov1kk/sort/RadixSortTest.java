@@ -12,7 +12,7 @@ public class RadixSortTest extends BaseSortTest {
     Sort radixSort = new RadixSort();
     radixSort.sort(array);
 
-    Assert.assertThat(array, hasSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
     Assert.assertThat(array, isSortedAsc());
   }
 }

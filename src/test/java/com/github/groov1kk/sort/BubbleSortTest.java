@@ -7,7 +7,12 @@ public class BubbleSortTest extends BaseSortTest {
 
   @Test
   public void testBubbleSort() {
+    int[] clone = array.clone();
+
     Sort sort = new BubbleSort();
-    Assert.assertThat(sort.sort(this.array), isSortedAsc());
+    sort.sort(array);
+
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, isSortedAsc());
   }
 }

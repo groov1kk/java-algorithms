@@ -5,9 +5,14 @@ import org.junit.Test;
 
 public class SelectionSortTest extends BaseSortTest {
 
-    @Test
-    public void testSelectionSort() {
-        Sort sort = new SelectionSort();
-        Assert.assertThat(sort.sort(array), isSortedAsc());
-    }
+  @Test
+  public void testSelectionSort() {
+    int[] clone = array.clone();
+
+    Sort sort = new SelectionSort();
+    sort.sort(array);
+
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, isSortedAsc());
+  }
 }

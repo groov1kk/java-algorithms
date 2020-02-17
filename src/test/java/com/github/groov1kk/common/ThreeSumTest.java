@@ -9,14 +9,15 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.iterableWithSize;
 
-public class ThreeSumAlgorithmTest extends BaseTest {
+public class ThreeSumTest extends BaseTest {
+
+  private static final ThreeSum threeSum = new ThreeSum();
 
   @Test
   public void testThreeSumAlgorithmTest() {
     int[] array = new int[] {10, 0, 40, 30, 15, 10, -20, -40};
 
-    ThreeSumAlgorithm threeSumAlgorithm = new ThreeSumAlgorithm();
-    List<int[]> sums = threeSumAlgorithm.sums(array);
+    List<int[]> sums = threeSum.sums(array);
 
     Assert.assertThat(sums, iterableWithSize(3));
     Assert.assertThat(

@@ -6,8 +6,6 @@ import javax.annotation.Nonnegative;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static com.github.groov1kk.Utils.swap;
-
 /**
  * <a href="https://en.wikipedia.org/wiki/Dutch_national_flag_problem">Dutch national flag problem
  * </a> algorithm.
@@ -53,16 +51,16 @@ public final class DutchFlag {
    *
    * @param array Array to rearrange it's elements
    * @param mid Element that will be considered as middle (white color).
-   * @param left Index, that represents a border between red and white elements
-   * @param right Index, that represents a border between white and blue elements
+   * @param left Index that represents a border between red and white elements
+   * @param right Index that represents a border between white and blue elements
    * @return {@code this}
    */
   public static DutchFlag rearrange(
       int[] array, int mid, @Nonnegative int left, @Nonnegative int right) {
     Objects.requireNonNull(array, "Array must not be null");
 
-    int low = left;
-    int high = right;
+    int low = Objects.checkIndex(left, array.length);
+    int high = Objects.checkIndex(right, array.length);
 
     int x = left;
 
@@ -75,7 +73,7 @@ public final class DutchFlag {
         x++;
       }
     }
-    return new DutchFlag(array, mid, low - 1, high + 1);
+    return new DutchFlag(array, mid, low, high);
   }
 
   /**
@@ -88,33 +86,33 @@ public final class DutchFlag {
   }
 
   /**
-   * Index that represents a border between red and white elements. Points on the last element in
-   * red area.
+   * Index that represents the border between elements in red and white areas. Points on the first
+   * element in white area.
    *
    * <p>Pay attention, that index may be negative. That's mean that there is no red color in the
    * current flag.
    *
-   * @return Last index of read area.
+   * @return First index of the white area.
    */
-  public int lowBorder() {
+  public int low() {
     return this.low;
   }
 
   /**
-   * Index that represents a border between white and blue elements. Points on the first element in
-   * blue area.
+   * Index that represents the border between elements in white and blue. Points on the last element
+   * in white area.
    *
    * <p>Pay attention, that index may be greater than length of rearranged array. That's mean that
    * there is no blue color in the current
    *
-   * @return First index of blue area
+   * @return Last index of the white area.
    */
-  public int highBorder() {
+  public int high() {
     return this.high;
   }
 
   /**
-   * Value, that represent white color.
+   * Value that represents white color.
    *
    * @return White color value
    */

@@ -7,7 +7,12 @@ public class QuickSortTest extends BaseSortTest {
 
   @Test
   public void testQuickSort() {
+    int[] clone = array.clone();
+
     Sort sort = new QuickSort();
-    Assert.assertThat(sort.sort(array), isSortedAsc());
+    sort.sort(array);
+
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, isSortedAsc());
   }
 }

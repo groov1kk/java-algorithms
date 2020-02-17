@@ -7,7 +7,12 @@ public class ShakerSortTest extends BaseSortTest {
 
   @Test
   public void testShakerSort() {
+    int[] clone = array.clone();
+
     Sort sort = new ShakerSort();
-    Assert.assertThat(sort.sort(array), isSortedAsc());
+    sort.sort(array);
+
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, isSortedAsc());
   }
 }

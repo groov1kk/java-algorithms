@@ -5,8 +5,8 @@ import static com.github.groov1kk.Utils.swap;
 /**
  * Quick sort algorithm. Uses Hoare partition scheme.
  *
- * <p>This implementation tries to get a <b>middle</b> element of the given array and it's
- * sub-arrays on each iterations as pivot element.
+ * <p>This implementation uses a <b>middle</b> element of the given array and it's sub-arrays on
+ * each iterations as pivot element.
  *
  * <p>Sorts in ascending order.
  *

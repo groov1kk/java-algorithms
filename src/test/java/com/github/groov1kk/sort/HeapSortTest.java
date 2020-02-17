@@ -7,12 +7,12 @@ public class HeapSortTest extends BaseSortTest {
 
   @Test
   public void testHeapSort() {
-    Sort sort = new HeapSort();
     int[] clone = array.clone();
 
+    Sort sort = new HeapSort();
     sort.sort(array);
 
-    Assert.assertThat(array, hasSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
     Assert.assertThat(array, isSortedAsc());
   }
 }

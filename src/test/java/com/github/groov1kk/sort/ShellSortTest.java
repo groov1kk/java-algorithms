@@ -7,12 +7,12 @@ public class ShellSortTest extends BaseSortTest {
 
   @Test
   public void testInsertionSort() {
-    Sort sort = new ShellSort();
     int[] clone = array.clone();
 
+    Sort sort = new ShellSort();
     sort.sort(array);
 
-    Assert.assertThat(array, hasSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
     Assert.assertThat(array, isSortedAsc());
   }
 }

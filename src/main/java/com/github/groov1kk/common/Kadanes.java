@@ -6,7 +6,7 @@ package com.github.groov1kk.common;
  * <p>Solves <a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem">Maximum sub-array
  * problem</a>.
  */
-public final class KadanesAlgorithm {
+public final class Kadanes {
 
   public int maxSubArray(int[] array) {
     int maxEndingHere = array[0];

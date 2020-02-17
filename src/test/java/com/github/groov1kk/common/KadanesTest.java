@@ -11,21 +11,21 @@ import java.util.Collection;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(Parameterized.class)
-public class KadanesAlgorithmTest {
+public class KadanesTest {
 
-  private final KadanesAlgorithm kadanesAlgorithm = new KadanesAlgorithm();
+  private static final Kadanes kadanesAlgorithm = new Kadanes();
 
   private final int[] actual;
   private final int expected;
 
-  public KadanesAlgorithmTest(int[] actual, int expected) {
+  public KadanesTest(int[] actual, int expected) {
     this.actual = actual;
     this.expected = expected;
   }
 
   @Test
   public void testAllPositive() {
-    Assert.assertThat(this.kadanesAlgorithm.maxSubArray(this.actual), is(this.expected));
+    Assert.assertThat(kadanesAlgorithm.maxSubArray(this.actual), is(this.expected));
   }
 
   @Parameterized.Parameters

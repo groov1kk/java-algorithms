@@ -1,5 +1,7 @@
 package com.github.groov1kk.common;
 
+import com.github.groov1kk.Checker;
+
 /**
  * Iterative implementation of fibonacci algorithm.
  *
@@ -8,7 +10,9 @@ package com.github.groov1kk.common;
 public final class Fibonacci {
 
   public int fibonacci(int n) {
-    if (n <= 0) {
+    Checker.requireNonNegative(n, "Number must be positive");
+
+    if (n <= 1) {
       return n;
     }
 
@@ -16,7 +20,7 @@ public final class Fibonacci {
     int current = 1;
     int previous = 0;
 
-    for (int i = 1; i < n; i++) {
+    for (int i = 2; i <= n; i++) {
       result = current + previous;
       previous = current;
       current = result;

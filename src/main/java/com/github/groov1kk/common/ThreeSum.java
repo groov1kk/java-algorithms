@@ -12,17 +12,17 @@ import java.util.Objects;
  *
  * <p>Time complexity is O(n^2).
  */
-public final class ThreeSumAlgorithm {
+public final class ThreeSum {
 
   private static final Sort DEFAULT_SORT_ALGORITHM = new InsertionSort();
 
   private final Sort sort;
 
-  public ThreeSumAlgorithm() {
+  public ThreeSum() {
     this(DEFAULT_SORT_ALGORITHM);
   }
 
-  public ThreeSumAlgorithm(Sort sort) {
+  public ThreeSum(Sort sort) {
     this.sort = Objects.requireNonNull(sort, "Sort algorithm must not be null");
   }
 

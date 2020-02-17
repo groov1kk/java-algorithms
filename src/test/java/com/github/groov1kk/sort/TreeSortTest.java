@@ -7,12 +7,12 @@ public class TreeSortTest extends BaseSortTest {
 
   @Test
   public void testTreeSort() {
-    Sort sort = new TreeSort();
     int[] clone = array.clone();
 
+    Sort sort = new TreeSort();
     sort.sort(array);
 
-    Assert.assertThat(array, hasSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
     Assert.assertThat(array, isSortedAsc());
   }
 }

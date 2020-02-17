@@ -56,7 +56,7 @@ abstract class BaseSortTest extends BaseTest {
    * @param expected Expected array
    * @return Matcher that verifies whether two arrays have the same elements in any order
    */
-  Matcher<int[]> hasSameItemsInAnyOrder(int[] expected) {
+  Matcher<int[]> hasTheSameItemsInAnyOrder(int[] expected) {
     return new BaseMatcher<>() {
 
       static final String DESCRIPTION = "Arrays have to have the same elements in any order";

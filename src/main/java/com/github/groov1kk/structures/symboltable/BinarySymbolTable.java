@@ -1,8 +1,10 @@
 package com.github.groov1kk.structures.symboltable;
 
+import com.github.groov1kk.Checker;
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,10 +24,8 @@ public class BinarySymbolTable<K extends Comparable<K>, V> implements SymbolTabl
   }
 
   @SuppressWarnings("unchecked")
-  public BinarySymbolTable(int capacity) {
-    if (capacity < 0) {
-      throw new IllegalArgumentException("Size must be positive");
-    }
+  public BinarySymbolTable(@Nonnegative int capacity) {
+    Checker.requireNonNegative(capacity, "Capacity must not be negative");
 
     this.keys = (K[]) new Comparable[capacity];
     this.values = (V[]) new Object[capacity];

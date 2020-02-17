@@ -1,5 +1,7 @@
 package com.github.groov1kk.structures.tree;
 
+import com.github.groov1kk.Checker;
+
 import javax.annotation.Nonnegative;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -33,7 +35,9 @@ public abstract class BinaryHeap<E extends Comparable<E>> implements Iterable<E>
    *
    * @param capacity Binary heap capacity
    */
-  public BinaryHeap(int capacity) {
+  public BinaryHeap(@Nonnegative int capacity) {
+    Checker.requireNonNegative(capacity, "Capacity must not be negative");
+
     @SuppressWarnings("unchecked")
     E[] localArray = (E[]) new Comparable[capacity];
     this.array = localArray;
@@ -90,6 +94,7 @@ public abstract class BinaryHeap<E extends Comparable<E>> implements Iterable<E>
    * @param newSize Heap new size
    */
   protected final void resize(@Nonnegative int newSize) {
+    Checker.requireNonNegative(newSize, "New size must not be negative");
     this.array = Arrays.copyOf(this.array, newSize);
   }
 
@@ -113,8 +118,8 @@ public abstract class BinaryHeap<E extends Comparable<E>> implements Iterable<E>
   protected abstract void heapify(int index, int size);
 
   /**
-   * Updating a key within max-heap or min-heap. This method is used to save the heap structure
-   * order after insertion operation.
+   * Updates a key within max-heap or min-heap. This method is used to save the heap structure order
+   * after insertion operation.
    *
    * @param index Index of key in array
    */

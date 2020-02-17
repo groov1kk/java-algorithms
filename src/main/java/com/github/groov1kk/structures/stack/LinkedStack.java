@@ -1,5 +1,6 @@
 package com.github.groov1kk.structures.stack;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.Objects;
@@ -73,6 +74,7 @@ public class LinkedStack<E> implements Stack<E> {
     return this.size == 0;
   }
 
+  @Nonnull
   @Override
   public Iterator<E> iterator() {
     return new LinkedStackIterator();

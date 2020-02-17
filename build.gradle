@@ -5,7 +5,8 @@ plugins {
 group 'com.github.groov1kk'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.11
+sourceCompatibility = JavaVersion.VERSION_1_10
+targetCompatibility = JavaVersion.VERSION_1_10
 
 repositories {
     mavenCentral()

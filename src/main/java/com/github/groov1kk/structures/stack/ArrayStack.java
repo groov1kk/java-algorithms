@@ -1,5 +1,7 @@
 package com.github.groov1kk.structures.stack;
 
+import com.github.groov1kk.Checker;
+
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -32,6 +34,8 @@ public class ArrayStack<E> implements Stack<E> {
    * @param initialCapacity Initial capacity of stack array
    */
   public ArrayStack(@Nonnegative int initialCapacity) {
+    Checker.requireNonNegative(initialCapacity, "Initial capacity must not be negative");
+
     @SuppressWarnings("unchecked")
     E[] localArray = (E[]) new Object[initialCapacity];
     this.array = localArray;
@@ -63,8 +67,8 @@ public class ArrayStack<E> implements Stack<E> {
   }
 
   @SafeVarargs
-  public static <E> Stack<E> of(E... elements) {
-    Stack<E> stack = new ArrayStack<>();
+  public static <E> ArrayStack<E> of(E... elements) {
+    ArrayStack<E> stack = new ArrayStack<>();
     stack.pushAll(elements);
     return stack;
   }

@@ -24,8 +24,8 @@ public class QuickSort3WayPartition implements Sort {
   private int[] sort(int[] array, int left, int right) {
     if (left < right) {
       DutchFlag flag = DutchFlag.rearrange(array, array[left], left, right);
-      sort(array, left, flag.lowBorder());
-      sort(array, flag.highBorder(), right);
+      sort(array, left, flag.low() - 1);
+      sort(array, flag.high() + 1, right);
     }
     return array;
   }

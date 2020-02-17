@@ -1,6 +1,9 @@
 package com.github.groov1kk;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Utils {

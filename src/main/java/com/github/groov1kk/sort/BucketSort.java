@@ -1,15 +1,20 @@
 package com.github.groov1kk.sort;
 
+import com.github.groov1kk.Checker;
 import com.github.groov1kk.Utils;
 
+import javax.annotation.Nonnegative;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Bucket sort algorithm. This implementation provides to set simple sort algorithm for the buckets
- * sorting. By default it uses <b>Insertion sort</b>.
+ * Bucket sort algorithm.
+ *
+ * <p>This implementation uses another sorting algorithm for sub-arrays sorting in every bucket. By
+ * default it uses <b>Insertion sort</b>. Another sorting algorithm also could be injected via
+ * constructor.
  *
  * <p>Bucket range also could be provided via constructor. Buckets size calculates dynamically
  * according to min and max elements of array values.
@@ -33,12 +38,12 @@ public class BucketSort implements Sort {
     this(DEFAULT_BUCKET_RANGE, DEFAULT_BUCKET_SORT);
   }
 
-  public BucketSort(int bucketRange) {
+  public BucketSort(@Nonnegative int bucketRange) {
     this(bucketRange, DEFAULT_BUCKET_SORT);
   }
 
-  public BucketSort(int bucketRange, Sort bucketSort) {
-    this.bucketRange = bucketRange;
+  public BucketSort(@Nonnegative int bucketRange, Sort bucketSort) {
+    this.bucketRange = Checker.requireNonNegative(bucketRange, "Bucket range must not be negative");
     this.bucketSort = Objects.requireNonNull(bucketSort, "Sort algorithm must not be null");
   }
 
