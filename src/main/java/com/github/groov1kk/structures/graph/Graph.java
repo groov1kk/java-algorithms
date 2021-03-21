@@ -1,5 +1,14 @@
 package com.github.groov1kk.structures.graph;
 
+import com.github.groov1kk.structures.queue.LinkedQueue;
+import com.github.groov1kk.structures.queue.Queue;
+import com.github.groov1kk.structures.stack.LinkedStack;
+import com.github.groov1kk.structures.stack.Stack;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
 /**
  * Graph abstract type.
  *
@@ -67,4 +76,54 @@ public interface Graph<V> {
    * @return amount of edges
    */
   int edges();
+
+  /**
+   * Breadth-First-Search algorithm. Uses the given {@code visitor} to manipulate with each vertexes
+   * which he will find.
+   *
+   * @param node node from this algorithm will start
+   * @param visitor visitor that provides to manipulate with each found node
+   */
+  default void breadthFirstSearch(V node, Consumer<V> visitor) {
+    Map<V, Boolean> marked = new HashMap<>();
+    Queue<V> queue = new LinkedQueue<>();
+    queue.enqueue(node);
+
+    while (!queue.isEmpty()) {
+      V vertex = queue.dequeue();
+      if (!marked.getOrDefault(vertex, false)) {
+        marked.put(vertex, true);
+        visitor.accept(vertex);
+
+        for (V adj : this.adjacent(vertex)) {
+          queue.enqueue(adj);
+        }
+      }
+    }
+  }
+
+  /**
+   * Depth-First-Search algorithm. Uses the given {@code visitor} to manipulate with each vertexes
+   * which he will * find.
+   *
+   * @param node node from this algorithm will start
+   * @param visitor visitor that provides to manipulate with each found node
+   */
+  default void depthFirstSearch(V node, Consumer<V> visitor) {
+    Map<V, Boolean> marked = new HashMap<>();
+    Stack<V> stack = new LinkedStack<>();
+    stack.push(node);
+
+    while (!stack.isEmpty()) {
+      V vertex = stack.pop();
+      if (!marked.getOrDefault(vertex, false)) {
+        visitor.accept(vertex);
+        marked.put(vertex, true);
+
+        for (V adj : this.adjacent(vertex)) {
+          stack.push(adj);
+        }
+      }
+    }
+  }
 }

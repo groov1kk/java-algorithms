@@ -1,17 +1,21 @@
 package com.github.groov1kk.structures.queue;
 
 import com.github.groov1kk.BaseTest;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.emptyIterable;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.iterableWithSize;
+import static org.junit.Assert.assertThat;
 
 public class LinkedQueueTest extends BaseTest {
 
   @Test
   public void testEmptyQueue() {
     Queue<Object> queue = new LinkedQueue<>();
-    Assert.assertThat(queue, emptyIterable());
+    assertThat(queue, emptyIterable());
   }
 
   @Test
@@ -19,9 +23,9 @@ public class LinkedQueueTest extends BaseTest {
     Queue<Object> queue = new LinkedQueue<>();
     queue.enqueue(1);
 
-    Assert.assertThat(queue, iterableWithSize(1));
-    Assert.assertThat(queue.size(), is(1));
-    Assert.assertThat(queue, hasItem(1));
+    assertThat(queue, iterableWithSize(1));
+    assertThat(queue.size(), is(1));
+    assertThat(queue, hasItem(1));
   }
 
   @Test
@@ -30,15 +34,15 @@ public class LinkedQueueTest extends BaseTest {
     queue.enqueue(1);
     queue.enqueue(2);
 
-    Assert.assertThat(queue, iterableWithSize(2));
-    Assert.assertThat(queue, hasItems(1, 2));
-    Assert.assertThat(queue.size(), is(2));
+    assertThat(queue, iterableWithSize(2));
+    assertThat(queue, hasItems(1, 2));
+    assertThat(queue.size(), is(2));
 
-    Assert.assertThat(queue.dequeue(), is(1));
+    assertThat(queue.dequeue(), is(1));
 
-    Assert.assertThat(queue, iterableWithSize(1));
-    Assert.assertThat(queue, hasItems(2));
-    Assert.assertThat(queue.size(), is(1));
+    assertThat(queue, iterableWithSize(1));
+    assertThat(queue, hasItems(2));
+    assertThat(queue.size(), is(1));
   }
 
   @Test
@@ -46,9 +50,9 @@ public class LinkedQueueTest extends BaseTest {
     Queue<Object> queue = new LinkedQueue<>();
     queue.enqueueAll(1, 2, 3);
 
-    Assert.assertThat(queue, iterableWithSize(3));
-    Assert.assertThat(queue, hasItems(1, 2, 3));
-    Assert.assertThat(queue.size(), is(3));
+    assertThat(queue, iterableWithSize(3));
+    assertThat(queue, hasItems(1, 2, 3));
+    assertThat(queue.size(), is(3));
   }
 
   @Test
@@ -56,9 +60,9 @@ public class LinkedQueueTest extends BaseTest {
     Queue<Integer> queue = ArrayQueue.of(1, 2, 3);
     Queue<Integer> copy = new LinkedQueue<>(queue);
 
-    Assert.assertThat(copy, iterableWithSize(3));
-    Assert.assertThat(copy.dequeue(), is(1));
-    Assert.assertThat(copy.dequeue(), is(2));
-    Assert.assertThat(copy.dequeue(), is(3));
+    assertThat(copy, iterableWithSize(3));
+    assertThat(copy.dequeue(), is(1));
+    assertThat(copy.dequeue(), is(2));
+    assertThat(copy.dequeue(), is(3));
   }
 }

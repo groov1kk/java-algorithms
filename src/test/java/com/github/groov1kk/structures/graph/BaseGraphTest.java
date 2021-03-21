@@ -1,12 +1,14 @@
 package com.github.groov1kk.structures.graph;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.Assert.assertThat;
 
 abstract class BaseGraphTest {
 
   /**
-   * Verifies,whether the given {@code vertex} of the given {@code graph} contains specific {@code
+   * Verifies, whether the given {@code vertex} of the given {@code graph} contains specific {@code
    * adjacent} vertexes.
    *
    * @param graph Graph to verify vertexes

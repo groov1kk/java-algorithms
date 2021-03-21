@@ -1,10 +1,12 @@
 package com.github.groov1kk.structures.tree;
 
 import com.github.groov1kk.BaseTest;
-import org.junit.Assert;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.iterableWithSize;
+import static org.junit.Assert.assertThat;
 
 public class BinarySearchTreeTest extends BaseTest {
 
@@ -13,11 +15,11 @@ public class BinarySearchTreeTest extends BaseTest {
     Tree<Integer, String> tree = new BinarySearchTree<>();
     tree.insert(1, "one");
 
-    Assert.assertThat(tree.keys(), iterableWithSize(1));
-    Assert.assertThat(tree.keys(), hasItems(1));
+    assertThat(tree.keys(), iterableWithSize(1));
+    assertThat(tree.keys(), hasItems(1));
 
-    Assert.assertThat(tree.values(), iterableWithSize(1));
-    Assert.assertThat(tree.values(), hasItems("one"));
+    assertThat(tree.values(), iterableWithSize(1));
+    assertThat(tree.values(), hasItems("one"));
   }
 
   @Test
@@ -26,8 +28,8 @@ public class BinarySearchTreeTest extends BaseTest {
     tree.insert(1, "one");
     tree.insert(2, "two");
 
-    Assert.assertThat(tree.find(1), is("one"));
-    Assert.assertThat(tree.find(2), is("two"));
+    assertThat(tree.find(1), is("one"));
+    assertThat(tree.find(2), is("two"));
   }
 
   @Test
@@ -38,8 +40,8 @@ public class BinarySearchTreeTest extends BaseTest {
     tree.insert(3, "three");
 
     tree.remove(2);
-    Assert.assertThat(tree.keys(), iterableWithSize(2));
-    Assert.assertThat(tree.keys(), hasItems(1, 3));
-    Assert.assertThat(tree.values(), hasItems("one", "three"));
+    assertThat(tree.keys(), iterableWithSize(2));
+    assertThat(tree.keys(), hasItems(1, 3));
+    assertThat(tree.values(), hasItems("one", "three"));
   }
 }

@@ -1,6 +1,7 @@
-package com.github.groov1kk.structures.tree;
+package com.github.groov1kk.structures.tree.heap;
 
 import com.github.groov1kk.Utils;
+import com.github.groov1kk.structures.tree.heap.BinaryHeap;
 
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;

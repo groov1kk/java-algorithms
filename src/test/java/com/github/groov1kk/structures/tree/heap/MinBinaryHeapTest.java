@@ -1,9 +1,9 @@
-package com.github.groov1kk.structures.tree;
+package com.github.groov1kk.structures.tree.heap;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class MinBinaryHeapTest {
 
@@ -17,8 +17,8 @@ public class MinBinaryHeapTest {
     heap.add(5);
     heap.add(-1);
 
-    Assert.assertThat(heap.delMin(), is(-1));
-    Assert.assertThat(heap.delMin(), is(1));
+    assertThat(heap.delMin(), is(-1));
+    assertThat(heap.delMin(), is(1));
   }
 
   @Test
@@ -26,7 +26,7 @@ public class MinBinaryHeapTest {
     Integer[] array = new Integer[] {4, -1, 2, 1, 4, -5, 2};
     MinBinaryHeap<Integer> heap = new MinBinaryHeap<>(array);
 
-    Assert.assertThat(heap.delMin(), is(-5));
-    Assert.assertThat(heap.delMin(), is(-1));
+    assertThat(heap.delMin(), is(-5));
+    assertThat(heap.delMin(), is(-1));
   }
 }

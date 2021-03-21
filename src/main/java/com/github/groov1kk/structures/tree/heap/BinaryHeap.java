@@ -1,4 +1,4 @@
-package com.github.groov1kk.structures.tree;
+package com.github.groov1kk.structures.tree.heap;
 
 import com.github.groov1kk.Checker;
 

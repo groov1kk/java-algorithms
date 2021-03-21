@@ -1,10 +1,10 @@
 package com.github.groov1kk.structures.dsu;
 
 import com.github.groov1kk.BaseTest;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class SimpleDisjointSetTest extends BaseTest {
 
@@ -13,7 +13,7 @@ public class SimpleDisjointSetTest extends BaseTest {
     DisjointSet<Integer> dsu = new SimpleDisjointSet<>();
     dsu.add(1);
 
-    Assert.assertThat(dsu.size(), is(1));
+    assertThat(dsu.size(), is(1));
   }
 
   @Test
@@ -24,8 +24,8 @@ public class SimpleDisjointSetTest extends BaseTest {
     dsu.add(3);
     dsu.union(1, 3);
 
-    Assert.assertThat(dsu.connected(1, 3), is(true));
-    Assert.assertThat(dsu.connected(1, 2), is(false));
+    assertThat(dsu.connected(1, 3), is(true));
+    assertThat(dsu.connected(1, 2), is(false));
   }
 
   @Test
@@ -33,7 +33,7 @@ public class SimpleDisjointSetTest extends BaseTest {
     DisjointSet<Integer> dsu = new SimpleDisjointSet<>();
     dsu.add(1);
 
-    Assert.assertThat(dsu.find(1), is(1));
+    assertThat(dsu.find(1), is(1));
   }
 
   @Test
@@ -46,17 +46,17 @@ public class SimpleDisjointSetTest extends BaseTest {
 
     dsu.union(1, 3);
 
-    Assert.assertThat(dsu.connected(1, 3), is(true));
-    Assert.assertThat(dsu.find(1), is(3));
+    assertThat(dsu.connected(1, 3), is(true));
+    assertThat(dsu.find(1), is(3));
 
     dsu.union(2, 4);
 
-    Assert.assertThat(dsu.connected(2, 4), is(true));
-    Assert.assertThat(dsu.find(2), is(4));
+    assertThat(dsu.connected(2, 4), is(true));
+    assertThat(dsu.find(2), is(4));
 
     dsu.union(1, 2);
 
-    Assert.assertThat(dsu.connected(1, 4), is(true));
-    Assert.assertThat(dsu.find(1), is(4));
+    assertThat(dsu.connected(1, 4), is(true));
+    assertThat(dsu.find(1), is(4));
   }
 }
