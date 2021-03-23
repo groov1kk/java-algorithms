@@ -5,8 +5,12 @@ import com.github.groov1kk.structures.queue.Queue;
 import com.github.groov1kk.structures.stack.LinkedStack;
 import com.github.groov1kk.structures.stack.Stack;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
 /**
@@ -81,8 +85,8 @@ public interface Graph<V> {
    * Breadth-First-Search algorithm. Uses the given {@code visitor} to manipulate with each vertexes
    * which he will find.
    *
-   * @param node node from this algorithm will start
-   * @param visitor visitor that provides to manipulate with each found node
+   * @param node Node from this algorithm will start
+   * @param visitor Visitor that provides to manipulate with each found node
    */
   default void breadthFirstSearch(V node, Consumer<V> visitor) {
     Map<V, Boolean> marked = new HashMap<>();
@@ -104,10 +108,10 @@ public interface Graph<V> {
 
   /**
    * Depth-First-Search algorithm. Uses the given {@code visitor} to manipulate with each vertexes
-   * which he will * find.
+   * which he will find.
    *
-   * @param node node from this algorithm will start
-   * @param visitor visitor that provides to manipulate with each found node
+   * @param node Node from this algorithm will start
+   * @param visitor Visitor that provides to manipulate with each found node
    */
   default void depthFirstSearch(V node, Consumer<V> visitor) {
     Map<V, Boolean> marked = new HashMap<>();
@@ -125,5 +129,103 @@ public interface Graph<V> {
         }
       }
     }
+  }
+
+  /**
+   * Checks, whether the given graph contains path between two provided vertexes. Uses
+   * Deep-First-Search to walk through this graph.
+   *
+   * <p>By default, this method compares graph's vertexes using {@link Objects#equals(Object,
+   * Object)}. This strategy can apply {@code null} values: in case of one of the given nodes is
+   * {@code null} but other is not - this method returns {@code false}. In case when two nodes are
+   * nulls - this method returns {@code true}.
+   *
+   * @param either Graph's node from method will start to search desired path
+   * @param other End node of desired path
+   * @return Is the paths between two nodes exist
+   * @see Objects#equals(Object, Object)
+   */
+  default boolean hasPath(@Nullable V either, @Nullable V other) {
+    return hasPath(either, other, Objects::equals);
+  }
+
+  /**
+   * Checks, whether the given graph contains path between two provided vertexes. Uses
+   * Deep-First-Search to walk through this graph.
+   *
+   * <p>This method applies comparing {@code strategy}, that provides to compare graph's nodes
+   * between each other.
+   *
+   * @param either Graph's node from method will start to search desired path
+   * @param other End node of desired path
+   * @param strategy Comparing strategy to compare graph's nodes
+   * @return Is the paths between two nodes exist
+   */
+  default boolean hasPath(V either, V other, BiPredicate<V, V> strategy) {
+    Objects.requireNonNull(strategy, "Strategy must not be null");
+
+    AtomicBoolean result = new AtomicBoolean();
+    this.depthFirstSearch(
+        either,
+        vertex -> {
+          if (strategy.test(vertex, other)) {
+            result.set(true);
+          }
+        });
+    return result.get();
+  }
+
+  /**
+   * Returns a list of nodes (the path), if it exists, between two given graph's nodes. The path
+   * consists of graph's nodes that are situated between {@code either} and {@code other} nodes. If
+   * path does not exist - this method will return {@code null}.
+   *
+   * @param either Graph's node from method will start to search desired path
+   * @param other End node of desired path
+   * @return A list of nodes between the given ones.
+   */
+  @Nullable
+  default Iterable<V> path(@Nullable V either, @Nullable V other) {
+    return path(either, other, Objects::equals);
+  }
+
+  /**
+   * Returns a list of nodes (the path), if it exists, between two given graph's nodes. The path
+   * consists of graph's nodes that are situated between {@code either} and {@code other} nodes. If
+   * path does not exist - this method will return {@code null}.
+   *
+   * <p>This method applies comparing {@code strategy}, that provides to compare graph's nodes
+   * between each other.
+   *
+   * @param either Graph's node from method will start to search desired path
+   * @param other End node of desired path
+   * @param strategy Comparing strategy to compare graph's nodes
+   * @return A list of nodes between the given ones.
+   */
+  @Nullable
+  default Iterable<V> path(V either, V other, BiPredicate<V, V> strategy) {
+    Objects.requireNonNull(strategy, "Strategy must not be null");
+
+    if (!this.hasPath(either, other, strategy)) {
+      return null;
+    }
+
+    Map<V, V> edgeTo = new HashMap<>();
+    this.depthFirstSearch(
+        either,
+        vertex -> {
+          for (V adj : this.adjacent(vertex)) {
+            if (!edgeTo.containsKey(adj) && !strategy.test(adj, vertex)) {
+              edgeTo.put(adj, vertex);
+            }
+          }
+        });
+
+    Stack<V> stack = new LinkedStack<>();
+    for (V x = other; !strategy.test(x, either); x = edgeTo.get(x)) {
+      stack.push(x);
+    }
+    stack.push(either);
+    return stack;
   }
 }
