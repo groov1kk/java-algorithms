@@ -2,10 +2,10 @@ package com.github.groov1kk.structures.queue;
 
 import com.github.groov1kk.Checker;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.Objects;
+import javax.annotation.Nonnegative;
+import javax.annotation.concurrent.NotThreadSafe;
 
 @NotThreadSafe
 public class ArrayQueue<E> implements Queue<E> {
@@ -58,12 +58,11 @@ public class ArrayQueue<E> implements Queue<E> {
     this.array[this.tail++] = element;
   }
 
-  @SafeVarargs
   @Override
-  public final void enqueueAll(E... elements) {
+  public void enqueueAll(E[] elements) {
     int expectedCapacity = size() + elements.length;
 
-    if (expectedCapacity < 1 || expectedCapacity > MAX_ARRAY_SIZE) {
+    if (expectedCapacity > MAX_ARRAY_SIZE) {
       throw new IllegalArgumentException("Amount of elements is too large");
     }
 

@@ -1,24 +1,21 @@
 package com.github.groov1kk.structures.graph;
 
-import com.github.groov1kk.structures.queue.LinkedQueue;
-import com.github.groov1kk.structures.queue.Queue;
-import com.github.groov1kk.structures.stack.LinkedStack;
-import com.github.groov1kk.structures.stack.Stack;
-
-import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
+
+import javax.annotation.Nullable;
+
+import com.github.groov1kk.structures.graph.algorithms.BreadthFirstSearch;
+import com.github.groov1kk.structures.graph.algorithms.DepthFirstPath;
+import com.github.groov1kk.structures.graph.algorithms.DepthFirstSearch;
 
 /**
  * Graph abstract type.
  *
  * @param <V> Vertexes type
  */
-public interface Graph<V> {
+public interface Graph<V> extends Iterable<V> {
 
   /**
    * Adds a vertex into this graph.
@@ -54,12 +51,12 @@ public interface Graph<V> {
    * Returns adjacent vertexes of the given {@code vertex}.
    *
    * @param vertex Vertex which adjacent nodes have to be returned.
-   * @return Adjacent vertexes
+   * @return Adjacent vertices
    */
   Iterable<V> adjacent(V vertex);
 
   /**
-   * Verifies, whether {@code either} vertex has connection with {@code other} vertex.
+   * Verifies, whether the {@code either} vertex has connection with the {@code other} vertex.
    *
    * @param either First vertex
    * @param other Second vertex
@@ -68,67 +65,43 @@ public interface Graph<V> {
   boolean isAdjacent(V either, V other);
 
   /**
-   * Returns amount of vertexes in this graph.
+   * Returns an amount of vertexes in this graph.
    *
    * @return amount of vertexes
    */
-  int vertexes();
+  int vertices();
 
   /**
-   * Returns amount of edges in this graph.
+   * Returns an amount of edges in this graph.
    *
    * @return amount of edges
    */
   int edges();
 
   /**
-   * Breadth-First-Search algorithm. Uses the given {@code visitor} to manipulate with each vertexes
-   * which he will find.
+   * Breadth-First-Search algorithm. Uses the given {@code visitor} to handle each vertexes which it
+   * will find during the traverse.
    *
    * @param node Node from this algorithm will start
    * @param visitor Visitor that provides to manipulate with each found node
    */
-  default void breadthFirstSearch(V node, Consumer<V> visitor) {
-    Map<V, Boolean> marked = new HashMap<>();
-    Queue<V> queue = new LinkedQueue<>();
-    queue.enqueue(node);
-
-    while (!queue.isEmpty()) {
-      V vertex = queue.dequeue();
-      if (!marked.getOrDefault(vertex, false)) {
-        marked.put(vertex, true);
-        visitor.accept(vertex);
-
-        for (V adj : this.adjacent(vertex)) {
-          queue.enqueue(adj);
-        }
-      }
-    }
+  default BreadthFirstSearch<V> breadthFirstSearch(V node, @Nullable Consumer<V> visitor) {
+    BreadthFirstSearch<V> breadthFirstSearch = new BreadthFirstSearch<>(this);
+    breadthFirstSearch.traverse(node, visitor);
+    return breadthFirstSearch;
   }
 
   /**
-   * Depth-First-Search algorithm. Uses the given {@code visitor} to manipulate with each vertexes
-   * which he will find.
+   * Depth-First-Search algorithm. Uses the given {@code visitor} to handle each vertexes which he
+   * will find during the traverse.
    *
    * @param node Node from this algorithm will start
    * @param visitor Visitor that provides to manipulate with each found node
    */
-  default void depthFirstSearch(V node, Consumer<V> visitor) {
-    Map<V, Boolean> marked = new HashMap<>();
-    Stack<V> stack = new LinkedStack<>();
-    stack.push(node);
-
-    while (!stack.isEmpty()) {
-      V vertex = stack.pop();
-      if (!marked.getOrDefault(vertex, false)) {
-        visitor.accept(vertex);
-        marked.put(vertex, true);
-
-        for (V adj : this.adjacent(vertex)) {
-          stack.push(adj);
-        }
-      }
-    }
+  default DepthFirstSearch<V> depthFirstSearch(V node, @Nullable Consumer<V> visitor) {
+    DepthFirstSearch<V> depthFirstSearch = new DepthFirstSearch<>(this);
+    depthFirstSearch.traverse(node, visitor);
+    return depthFirstSearch;
   }
 
   /**
@@ -162,17 +135,7 @@ public interface Graph<V> {
    * @return Is the paths between two nodes exist
    */
   default boolean hasPath(V either, V other, BiPredicate<V, V> strategy) {
-    Objects.requireNonNull(strategy, "Strategy must not be null");
-
-    AtomicBoolean result = new AtomicBoolean();
-    this.depthFirstSearch(
-        either,
-        vertex -> {
-          if (strategy.test(vertex, other)) {
-            result.set(true);
-          }
-        });
-    return result.get();
+    return new DepthFirstPath<>(this, either, strategy).hasPath(other);
   }
 
   /**
@@ -185,8 +148,8 @@ public interface Graph<V> {
    * @return A list of nodes between the given ones.
    */
   @Nullable
-  default Iterable<V> path(@Nullable V either, @Nullable V other) {
-    return path(either, other, Objects::equals);
+  default Iterable<V> getPath(@Nullable V either, @Nullable V other) {
+    return getPath(either, other, Objects::equals);
   }
 
   /**
@@ -203,29 +166,7 @@ public interface Graph<V> {
    * @return A list of nodes between the given ones.
    */
   @Nullable
-  default Iterable<V> path(V either, V other, BiPredicate<V, V> strategy) {
-    Objects.requireNonNull(strategy, "Strategy must not be null");
-
-    if (!this.hasPath(either, other, strategy)) {
-      return null;
-    }
-
-    Map<V, V> edgeTo = new HashMap<>();
-    this.depthFirstSearch(
-        either,
-        vertex -> {
-          for (V adj : this.adjacent(vertex)) {
-            if (!edgeTo.containsKey(adj) && !strategy.test(adj, vertex)) {
-              edgeTo.put(adj, vertex);
-            }
-          }
-        });
-
-    Stack<V> stack = new LinkedStack<>();
-    for (V x = other; !strategy.test(x, either); x = edgeTo.get(x)) {
-      stack.push(x);
-    }
-    stack.push(either);
-    return stack;
+  default Iterable<V> getPath(V either, V other, BiPredicate<V, V> strategy) {
+    return new DepthFirstPath<>(this, either, strategy).getPath(other);
   }
 }

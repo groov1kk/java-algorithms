@@ -16,7 +16,7 @@ public interface DisjointSet<E> extends Iterable<E> {
   void add(E element);
 
   /**
-   * Finds a root of the given element inside of disjoint set.
+   * Finds a root of the given element inside the disjoint set.
    *
    * @param element Element to find it's root
    * @return Element's root

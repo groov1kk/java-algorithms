@@ -34,14 +34,14 @@ public interface Tree<K extends Comparable<K>, V> {
   void remove(K key);
 
   /**
-   * List of all keys from the each node of the tree.
+   * List of all keys from each node of the tree.
    *
    * @return Tree's keys
    */
   Iterable<K> keys();
 
   /**
-   * List of all values from the each node of the tree.
+   * List of all values from each node of the tree.
    *
    * @return Tree's values.
    */

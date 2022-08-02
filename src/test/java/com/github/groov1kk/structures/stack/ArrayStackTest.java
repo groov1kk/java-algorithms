@@ -1,14 +1,15 @@
 package com.github.groov1kk.structures.stack;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Test;
-
 import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import com.github.groov1kk.BaseTest;
 
 public class ArrayStackTest extends BaseTest {
 
@@ -45,7 +46,7 @@ public class ArrayStackTest extends BaseTest {
   @Test
   public void testPushAllElementStack() {
     Stack<Integer> stack = new ArrayStack<>();
-    stack.pushAll(1, 2, 3);
+    stack.pushAll(new Integer[] {1, 2, 3});
 
     assertThat(stack, iterableWithSize(3));
     assertThat(stack, hasItems(1, 2, 3));

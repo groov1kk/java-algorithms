@@ -1,5 +1,8 @@
 package com.github.groov1kk.sort;
 
+import static com.github.groov1kk.matchers.IsIntArrayContainingInAnyOrder.arrayContainingInAnyOrder;
+import static com.github.groov1kk.matchers.IsIntArraySorted.naturalOrder;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +15,7 @@ public class ShellSortTest extends BaseSortTest {
     Sort sort = new ShellSort();
     sort.sort(array);
 
-    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
-    Assert.assertThat(array, isSortedAsc());
+    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
+    Assert.assertThat(array, naturalOrder());
   }
 }

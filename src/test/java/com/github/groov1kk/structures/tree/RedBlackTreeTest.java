@@ -1,11 +1,12 @@
 package com.github.groov1kk.structures.tree;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Test;
-
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import com.github.groov1kk.BaseTest;
 
 public class RedBlackTreeTest extends BaseTest {
 

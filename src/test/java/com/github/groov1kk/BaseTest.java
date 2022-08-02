@@ -28,17 +28,12 @@ public abstract class BaseTest {
    * @throws IllegalArgumentException if {@code from > to} and if a length of given array is bigger
    *     than the sum of absolute value of from and to.
    */
-  protected Integer[] distinctArray(int length, int from, int to) {
+  protected int[] distinctArray(int length, int from, int to) {
     if (length > Math.abs(from) + Math.abs(to)) {
       throw new IllegalArgumentException(
           "The length of the array must not be bigger than the sum of absolute values of 'from' and 'to' elements");
     }
 
-    return ThreadLocalRandom.current()
-        .ints(from, to)
-        .distinct()
-        .limit(length)
-        .boxed()
-        .toArray(Integer[]::new);
+    return ThreadLocalRandom.current().ints(from, to).distinct().limit(length).toArray();
   }
 }

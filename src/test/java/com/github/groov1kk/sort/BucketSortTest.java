@@ -1,5 +1,8 @@
 package com.github.groov1kk.sort;
 
+import static com.github.groov1kk.matchers.IsIntArrayContainingInAnyOrder.arrayContainingInAnyOrder;
+import static com.github.groov1kk.matchers.IsIntArraySorted.naturalOrder;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,8 +15,8 @@ public class BucketSortTest extends BaseSortTest {
     Sort sort = new BucketSort();
     sort.sort(array);
 
-    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
-    Assert.assertThat(array, isSortedAsc());
+    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
+    Assert.assertThat(array, naturalOrder());
   }
 
   @Test
@@ -24,8 +27,8 @@ public class BucketSortTest extends BaseSortTest {
     Sort sort = new BucketSort(bucketRange);
     sort.sort(array);
 
-    Assert.assertThat(array, isSortedAsc());
-    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, naturalOrder());
+    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
   }
 
   @Test
@@ -37,7 +40,7 @@ public class BucketSortTest extends BaseSortTest {
     Sort sort = new BucketSort(bucketRange, bucketSort);
     sort.sort(array);
 
-    Assert.assertThat(array, isSortedAsc());
-    Assert.assertThat(array, hasTheSameItemsInAnyOrder(clone));
+    Assert.assertThat(array, naturalOrder());
+    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
   }
 }

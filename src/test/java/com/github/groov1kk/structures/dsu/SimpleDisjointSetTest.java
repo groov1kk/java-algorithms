@@ -1,10 +1,11 @@
 package com.github.groov1kk.structures.dsu;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Test;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import com.github.groov1kk.BaseTest;
 
 public class SimpleDisjointSetTest extends BaseTest {
 

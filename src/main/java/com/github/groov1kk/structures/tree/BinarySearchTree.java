@@ -1,9 +1,10 @@
 package com.github.groov1kk.structures.tree;
 
+import java.util.function.Consumer;
+
+import com.github.groov1kk.structures.VisitedTraversal;
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;
-
-import java.util.function.BiConsumer;
 
 /**
  * Binary search tree implementation.
@@ -15,6 +16,8 @@ import java.util.function.BiConsumer;
  * @param <V> Values type
  */
 public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> {
+
+  private final InorderTreeWalk traversal = new InorderTreeWalk();
 
   private Node<K, V> root;
 
@@ -96,42 +99,28 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     return temp;
   }
 
-  private void traverse(BiConsumer<K, V> visitor) {
-    traverse(this.root, visitor);
-  }
-
-  private void traverse(Node<K, V> node, BiConsumer<K, V> visitor) {
-    if (node == null) {
-      return;
-    }
-
-    traverse(node.left, visitor);
-    visitor.accept(node.key, node.value);
-    traverse(node.right, visitor);
-  }
-
   @Override
   public Iterable<K> keys() {
     Queue<K> queue = new ArrayQueue<>();
-    traverse((key, value) -> queue.enqueue(key));
+    traversal.traverse(root, node -> queue.enqueue(node.key));
     return queue;
   }
 
   @Override
   public Iterable<V> values() {
     Queue<V> queue = new ArrayQueue<>();
-    traverse((key, value) -> queue.enqueue(value));
+    traversal.traverse(root, node -> queue.enqueue(node.value));
     return queue;
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder("[");
-    traverse((key, value) -> builder.append(String.format("[%s=%s], ", key, value)));
+    traversal.traverse(root, node -> builder.append(String.format("[%s=%s], ", node.key, node.value)));
     return builder.replace(builder.length() - 2, builder.length(), "]").toString();
   }
 
-  private static class Node<K, V> {
+  private static final class Node<K, V> {
 
     private K key;
     private V value;
@@ -147,6 +136,26 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     @Override
     public String toString() {
       return String.format("[%s=%s]", this.key, this.value);
+    }
+  }
+
+  private class InorderTreeWalk implements VisitedTraversal<Node<K, V>> {
+
+    @Override
+    public boolean isVisited(Node<K, V> node) {
+      // Not implemented
+      return false;
+    }
+
+    @Override
+    public void traverse(Node<K, V> node, Consumer<Node<K, V>> visitor) {
+      if (node == null) {
+        return;
+      }
+
+      traverse(node.left, visitor);
+      visitor.accept(node);
+      traverse(node.right, visitor);
     }
   }
 }
