@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 /**
- * Simple implementation of symbol table. Uses linked list to store it's data.
+ * Simple implementation of symbol table. Uses linked list to store its data.
  *
  * <p>Read, write and remove operations have O(n) average time complexity.
  *

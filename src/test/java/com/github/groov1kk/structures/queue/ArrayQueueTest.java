@@ -1,14 +1,15 @@
 package com.github.groov1kk.structures.queue;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Test;
-
 import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
+
+import com.github.groov1kk.BaseTest;
 
 public class ArrayQueueTest extends BaseTest {
 
@@ -48,7 +49,7 @@ public class ArrayQueueTest extends BaseTest {
   @Test
   public void testEnqueueAllElementQueue() {
     Queue<Object> queue = new ArrayQueue<>();
-    queue.enqueueAll(1, 2, 3);
+    queue.enqueueAll(new Integer[] {1, 2, 3});
 
     assertThat(queue, iterableWithSize(3));
     assertThat(queue, hasItems(1, 2, 3));

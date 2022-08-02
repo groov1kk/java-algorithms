@@ -1,39 +1,26 @@
 package com.github.groov1kk.search;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import static org.hamcrest.Matchers.is;
 
-public class LinearSearchTest extends BaseTest {
+import org.junit.Assert;
+import org.junit.Test;
 
-  private static final int ARRAY_LENGTH = 30;
-  private static final int FROM_VALUE = -50;
-  private static final int TO_VALUE = 50;
+public class LinearSearchTest extends BaseSearchTest {
 
-  private Integer[] array;
-  private Search<Integer> search;
-
-  @Before
-  public void init() {
-    this.search = new LinearSearch<>();
-    this.array = distinctArray(ARRAY_LENGTH, FROM_VALUE, TO_VALUE);
-  }
+  private final Search<Integer> search = new LinearSearch<>();
 
   @Test
   public void testLinearSearchValuePresent() {
     int middle = ARRAY_LENGTH / 2;
-    int value = this.array[middle];
+    int value = array[middle];
 
-    Assert.assertThat(this.search.rank(this.array, value), is(middle));
+    Assert.assertThat(search.rank(array, value), is(middle));
   }
 
   @Test
   public void testLinearSearchValueNotPresent() {
     int value = TO_VALUE + 2; // More than upper bound;
 
-    Assert.assertThat(this.search.rank(this.array, value), is(-1));
+    Assert.assertThat(search.rank(array, value), is(-1));
   }
 }

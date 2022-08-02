@@ -1,13 +1,14 @@
 package com.github.groov1kk.common;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.iterableWithSize;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.iterableWithSize;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.github.groov1kk.BaseTest;
 
 public class ThreeSumTest extends BaseTest {
 

@@ -1,11 +1,17 @@
 package com.github.groov1kk.structures.graph;
 
-import javax.annotation.concurrent.NotThreadSafe;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.NotThreadSafe;
+
+import com.github.groov1kk.structures.graph.algorithms.DepthFirstSearch;
 
 /**
  * Undirected graph implementation. Does not apply {@code null} elements. Supports cycles and
@@ -26,7 +32,6 @@ public class UndirectedGraph<V> implements Graph<V> {
   @Override
   public final void addVertex(V vertex) {
     Objects.requireNonNull(vertex, "Vertex must not be null");
-
     this.adjacent.computeIfAbsent(vertex, key -> new LinkedList<>());
   }
 
@@ -48,7 +53,7 @@ public class UndirectedGraph<V> implements Graph<V> {
   }
 
   @Override
-  public void removeVertex(V vertex) {
+  public void removeVertex(@Nullable V vertex) {
     if (vertex == null) {
       return;
     }
@@ -83,7 +88,7 @@ public class UndirectedGraph<V> implements Graph<V> {
   }
 
   @Override
-  public int vertexes() {
+  public int vertices() {
     return this.adjacent.keySet().size();
   }
 
@@ -94,22 +99,68 @@ public class UndirectedGraph<V> implements Graph<V> {
 
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder("[");
-    this.adjacent.forEach(
-        (vertex, edges) -> {
-          builder.append("[").append(vertex.toString()).append(":");
-          edges.forEach(
-              edge -> {
-                builder
-                    .append("[")
-                    .append(vertex.toString())
-                    .append("-")
-                    .append(edge.toString())
-                    .append("]")
-                    .append(",");
-              });
-          builder.replace(builder.length() - 1, builder.length(), "]").append(",");
-        });
-    return builder.replace(builder.length() - 1, builder.length(), "]").toString();
+    StringBuilder result = new StringBuilder("[");
+    DepthFirstSearch<V> search = new DepthFirstSearch<>(this);
+    for (V next : this) {
+      if (!search.isVisited(next)) {
+        if (result.length() > 1) {
+          result.append(",").append(" ");
+        }
+        StringBuilder builder = new StringBuilder("[");
+        search.traverse(
+            next,
+            vertex -> {
+              if (builder.length() > 1) {
+                builder.append(",").append(" ");
+              }
+              builder.append(vertex.toString());
+            });
+        result.append(builder.append("]"));
+      }
+    }
+    return result.append("]").toString();
+  }
+
+  @Nonnull
+  @Override
+  public Iterator<V> iterator() {
+    return new Iterator<>() {
+
+      private final Iterator<V> iterator = UndirectedGraph.this.adjacent.keySet().iterator();
+
+      @Override
+      public boolean hasNext() {
+        return iterator.hasNext();
+      }
+
+      @Override
+      public V next() {
+        return iterator.next();
+      }
+    };
+  }
+
+  /**
+   * Undirected graph builder.
+   *
+   * @param <V> Vertexes type
+   */
+  public static class Builder<V> {
+
+    private final UndirectedGraph<V> graph = new UndirectedGraph<>();
+
+    public Builder<V> addVertex(V vertex) {
+      graph.addVertex(vertex);
+      return this;
+    }
+
+    public Builder<V> addEdge(V either, V other) {
+      graph.addEdge(either, other);
+      return this;
+    }
+
+    public UndirectedGraph<V> build() {
+      return graph;
+    }
   }
 }

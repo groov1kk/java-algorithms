@@ -1,10 +1,17 @@
 package com.github.groov1kk.structures.graph;
 
-import org.junit.Test;
-
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.emptyIterable;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Test;
 
 public class UndirectedGraphTest extends BaseGraphTest {
 
@@ -14,7 +21,7 @@ public class UndirectedGraphTest extends BaseGraphTest {
     graph.addVertex("A");
     graph.addVertex("B");
 
-    assertThat(graph.vertexes(), is(2));
+    assertThat(graph.vertices(), is(2));
     assertThat(graph.edges(), is(0));
     assertThat(graph.adjacent("A"), is(emptyIterable()));
     assertThat(graph.adjacent("B"), is(emptyIterable()));
@@ -27,7 +34,7 @@ public class UndirectedGraphTest extends BaseGraphTest {
     graph.addVertex("A");
     graph.addVertex("B");
 
-    assertThat(graph.vertexes(), is(2));
+    assertThat(graph.vertices(), is(2));
 
     graph.addEdge("A", "B");
     graph.addEdge("A", "B");
@@ -63,12 +70,12 @@ public class UndirectedGraphTest extends BaseGraphTest {
 
     graph.removeVertex("A");
 
-    assertThat(graph.vertexes(), is(1));
+    assertThat(graph.vertices(), is(1));
     assertThat(graph.edges(), is(0));
   }
 
   @Test
-  public void removeEdgeTest() {
+  public void testRemoveEdge() {
     Graph<String> graph = new UndirectedGraph<>();
     graph.addVertex("A");
     graph.addVertex("B");
@@ -86,5 +93,57 @@ public class UndirectedGraphTest extends BaseGraphTest {
     graph.removeEdge("C", "B");
     assertThat(graph.edges(), is(3));
     assertThat(graph.isAdjacent("C", "B"), is(false));
+  }
+
+  @Test
+  public void testToString() {
+    Graph<String> graph = new UndirectedGraph<>();
+    graph.addVertex("A");
+    graph.addVertex("B");
+    graph.addVertex("C");
+    graph.addVertex("D");
+
+    graph.addEdge("A", "B");
+    graph.addEdge("C", "D");
+
+    assertThat(graph.toString(), is(equalTo("[[A, B], [C, D]]")));
+
+    graph.addEdge("B", "D");
+
+    assertThat(graph.toString(), is(equalTo("[[A, B, D, C]]")));
+  }
+
+  @Test
+  public void testBfsUndirectedGraph() {
+    Graph<Integer> graph = undirectedGraph();
+
+    List<Integer> result = new LinkedList<>();
+    graph.breadthFirstSearch(1, result::add);
+
+    assertThat(result, is(contains(1, 2, 3, 4, 5, 6, 7)));
+  }
+
+  @Test
+  public void testDfsUndirectedGraph() {
+    Graph<Integer> graph = undirectedGraph();
+
+    List<Integer> result = new LinkedList<>();
+    graph.depthFirstSearch(1, result::add);
+
+    assertThat(result, is(contains(1, 3, 7, 6, 2, 5, 4)));
+  }
+
+  @Test
+  public void testHasPathUndirectedGraph() {
+    Graph<Integer> graph = undirectedGraph();
+    assertThat(graph.hasPath(1, 5), is(true));
+    assertThat(graph.hasPath(1, 10), is(false));
+  }
+
+  @Test
+  public void testPathUndirectedGraph() {
+    Graph<Integer> graph = undirectedGraph();
+    assertThat(graph.getPath(1, 6), hasItems(1, 3, 6));
+    assertThat(graph.getPath(1, 10), is(nullValue()));
   }
 }

@@ -1,11 +1,14 @@
 package com.github.groov1kk.structures.tree;
 
+import java.util.function.Consumer;
+
+import com.github.groov1kk.structures.VisitedTraversal;
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;
 
-import java.util.function.Consumer;
-
 public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
+
+  private final InorderTreeWalk traversal = new InorderTreeWalk();
 
   private Node<K, V> root;
 
@@ -91,7 +94,6 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     this.root = remove(this.root, key);
   }
 
-  @SuppressWarnings("unchecked")
   private Node<K, V> remove(Node<K, V> node, K key) {
     if (node == null) {
       return null;
@@ -174,34 +176,24 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return temp;
   }
 
-  private void traverse(Node<K, V> node, Consumer<Node<K, V>> visitor) {
-    if (node == null) {
-      return;
-    }
-
-    traverse(node.left, visitor);
-    visitor.accept(node);
-    traverse(node.right, visitor);
-  }
-
   @Override
   public Iterable<K> keys() {
     Queue<K> queue = new ArrayQueue<>();
-    traverse(this.root, x -> queue.enqueue(x.key));
+    traversal.traverse(this.root, x -> queue.enqueue(x.key));
     return queue;
   }
 
   @Override
   public Iterable<V> values() {
     Queue<V> queue = new ArrayQueue<>();
-    traverse(this.root, x -> queue.enqueue(x.value));
+    traversal.traverse(this.root, x -> queue.enqueue(x.value));
     return queue;
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder("[");
-    traverse(this.root, builder::append);
+    traversal.traverse(this.root, builder::append);
     return builder.append("]").toString();
   }
 
@@ -224,6 +216,26 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     @Override
     public String toString() {
       return "[" + this.key + "=" + this.value + " " + (this.isRed ? "Red" : "Black") + "]";
+    }
+  }
+
+  private class InorderTreeWalk implements VisitedTraversal<Node<K, V>> {
+
+    @Override
+    public boolean isVisited(Node<K, V> node) {
+      // Not implemented
+      return false;
+    }
+
+    @Override
+    public void traverse(Node<K, V> node, Consumer<Node<K, V>> visitor) {
+      if (node == null) {
+        return;
+      }
+
+      traverse(node.left, visitor);
+      visitor.accept(node);
+      traverse(node.right, visitor);
     }
   }
 }

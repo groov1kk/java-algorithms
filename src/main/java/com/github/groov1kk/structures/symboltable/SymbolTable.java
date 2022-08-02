@@ -1,7 +1,7 @@
 package com.github.groov1kk.structures.symboltable;
 
 /**
- * Associated data structure which stores it's data as key-value pair.
+ * Associated data structure which stores its data as key-value pair.
  *
  * @param <K> Key type
  * @param <V> Value type

@@ -19,7 +19,7 @@ public interface Queue<E> extends Iterable<E> {
    *
    * @param elements Elements to insert
    */
-  void enqueueAll(E... elements);
+  void enqueueAll(E[] elements);
 
   /**
    * Returns and removes the first element from the queue.

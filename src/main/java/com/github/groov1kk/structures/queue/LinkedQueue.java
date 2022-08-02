@@ -1,8 +1,9 @@
 package com.github.groov1kk.structures.queue;
 
-import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Iterator;
 import java.util.Objects;
+
+import javax.annotation.concurrent.NotThreadSafe;
 
 @NotThreadSafe
 public class LinkedQueue<E> implements Queue<E> {
@@ -30,9 +31,8 @@ public class LinkedQueue<E> implements Queue<E> {
     this.size++;
   }
 
-  @SafeVarargs
   @Override
-  public final void enqueueAll(E... elements) {
+  public void enqueueAll(E[] elements) {
     for (E element : elements) {
       enqueue(element);
     }

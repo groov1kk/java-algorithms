@@ -1,53 +1,40 @@
 package com.github.groov1kk.search;
 
-import com.github.groov1kk.BaseTest;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 
-import static org.hamcrest.Matchers.is;
+import org.junit.Test;
 
-public class BinarySearchTest extends BaseTest {
+public class BinarySearchTest extends BaseSearchTest {
 
-  private static final int ARRAY_LENGTH = 30;
-  private static final int FROM_VALUE = -50;
-  private static final int TO_VALUE = 50;
-
-  private Integer[] array;
-  private Search<Integer> search;
-
-  @Before
-  public void init() {
-    this.search = new BinarySearch<>();
-    this.array = distinctArray(ARRAY_LENGTH, FROM_VALUE, TO_VALUE);
-  }
+  private final Search<Integer> search = new BinarySearch<>();;
 
   @Test
   public void testBinarySearchValuePresent() {
-    Arrays.sort(this.array);
+    Arrays.sort(array);
 
     // Middle element
-    int position = this.array.length / 2;
-    int value = this.array[position];
-    Assert.assertThat(this.search.rank(this.array, value), is(position));
+    int position = array.length / 2;
+    int value = array[position];
+    assertThat(search.rank(array, value), is(position));
 
     // Left from middle
-    position = this.array.length / 2 - 1;
-    value = this.array[position];
-    Assert.assertThat(this.search.rank(this.array, value), is(position));
+    position = array.length / 2 - 1;
+    value = array[position];
+    assertThat(search.rank(array, value), is(position));
 
     // Right from middle
-    position = this.array.length / 2 + 1;
-    value = this.array[position];
-    Assert.assertThat(this.search.rank(this.array, value), is(position));
+    position = array.length / 2 + 1;
+    value = array[position];
+    assertThat(search.rank(array, value), is(position));
   }
 
   @Test
   public void testBinarySearchValueNotPresent() {
     int value = TO_VALUE + 2; // More than upper bound;
 
-    Assert.assertThat(this.search.rank(this.array, value), is(-1));
+    assertThat(search.rank(array, value), is(-1));
   }
 }
