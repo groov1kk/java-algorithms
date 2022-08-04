@@ -13,7 +13,9 @@ public interface Traversal<N> {
    * @param node Graph's node to check
    * @return {@code true} if node was visited
    */
-  boolean isVisited(N node);
+  default boolean isVisited(N node) {
+    return false;
+  }
 
   /**
    * Performs traverse of a specific structure.

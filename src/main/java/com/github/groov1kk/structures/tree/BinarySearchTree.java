@@ -1,10 +1,14 @@
 package com.github.groov1kk.structures.tree;
 
-import java.util.function.Consumer;
+import java.util.Objects;
+
+import javax.annotation.Nullable;
 
 import com.github.groov1kk.structures.VisitedTraversal;
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;
+import com.github.groov1kk.structures.tree.algorithms.InorderTreeWalk;
+import com.github.groov1kk.structures.tree.algorithms.Node;
 
 /**
  * Binary search tree implementation.
@@ -17,13 +21,24 @@ import com.github.groov1kk.structures.queue.Queue;
  */
 public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
-  private final InorderTreeWalk traversal = new InorderTreeWalk();
+  private VisitedTraversal<Node<K, V>> traversal;
+  private NodeImpl<K, V> root;
 
-  private Node<K, V> root;
+  public BinarySearchTree() {
+    this(new InorderTreeWalk<>());
+  }
+
+  public BinarySearchTree(VisitedTraversal<Node<K, V>> traversal) {
+    this.traversal = Objects.requireNonNull(traversal);
+  }
+
+  public void setTraversal(VisitedTraversal<Node<K, V>> traversal) {
+    this.traversal = Objects.requireNonNull(traversal);
+  }
 
   @Override
   public V find(K key) {
-    Node<K, V> node = this.root;
+    NodeImpl<K, V> node = this.root;
     while (node != null) {
       if (node.key.compareTo(key) == 0) {
         return node.value;
@@ -38,9 +53,9 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     this.root = insert(this.root, key, value);
   }
 
-  private Node<K, V> insert(Node<K, V> node, K key, V value) {
+  private NodeImpl<K, V> insert(NodeImpl<K, V> node, K key, V value) {
     if (node == null) {
-      return new Node<>(key, value);
+      return new NodeImpl<>(key, value);
     }
 
     if (node.key.compareTo(key) == 0) {
@@ -58,7 +73,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     this.root = remove(this.root, key);
   }
 
-  private Node<K, V> remove(Node<K, V> node, K key) {
+  private NodeImpl<K, V> remove(NodeImpl<K, V> node, K key) {
     if (node == null) {
       return null;
     }
@@ -74,7 +89,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
         return node.right;
       }
 
-      Node<K, V> temp = node;
+      NodeImpl<K, V> temp = node;
       node = min(temp.right);
       node.right = deleteMin(temp.right);
       node.left = temp.left;
@@ -82,7 +97,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     return node;
   }
 
-  private Node<K, V> deleteMin(Node<K, V> node) {
+  private NodeImpl<K, V> deleteMin(NodeImpl<K, V> node) {
     if (node.left == null) {
       return node.right;
     }
@@ -91,8 +106,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
     return node;
   }
 
-  private Node<K, V> min(Node<K, V> node) {
-    Node<K, V> temp = node;
+  private NodeImpl<K, V> min(NodeImpl<K, V> node) {
+    NodeImpl<K, V> temp = node;
     while (temp.left != null) {
       temp = temp.left;
     }
@@ -102,60 +117,62 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements Tree<K, V> 
   @Override
   public Iterable<K> keys() {
     Queue<K> queue = new ArrayQueue<>();
-    traversal.traverse(root, node -> queue.enqueue(node.key));
+    traversal.traverse(root, node -> queue.enqueue(node.key()));
     return queue;
   }
 
   @Override
   public Iterable<V> values() {
     Queue<V> queue = new ArrayQueue<>();
-    traversal.traverse(root, node -> queue.enqueue(node.value));
+    traversal.traverse(root, node -> queue.enqueue(node.value()));
     return queue;
   }
 
   @Override
   public String toString() {
     StringBuilder builder = new StringBuilder("[");
-    traversal.traverse(root, node -> builder.append(String.format("[%s=%s], ", node.key, node.value)));
+    traversal.traverse(root, builder::append);
     return builder.replace(builder.length() - 2, builder.length(), "]").toString();
   }
 
-  private static final class Node<K, V> {
+  private static final class NodeImpl<K, V> implements Node<K, V> {
 
     private K key;
     private V value;
 
-    private Node<K, V> left;
-    private Node<K, V> right;
+    private NodeImpl<K, V> left;
+    private NodeImpl<K, V> right;
 
-    Node(K key, V value) {
+    NodeImpl(K key, V value) {
       this.key = key;
       this.value = value;
     }
 
     @Override
+    public K key() {
+      return key;
+    }
+
+    @Override
+    public V value() {
+      return value;
+    }
+
+    @Nullable
+    @Override
+    public NodeImpl<K, V> left() {
+      return left;
+    }
+
+    @Nullable
+    @Override
+    public NodeImpl<K, V> right() {
+      return right;
+    }
+
+    @Override
     public String toString() {
       return String.format("[%s=%s]", this.key, this.value);
-    }
-  }
-
-  private class InorderTreeWalk implements VisitedTraversal<Node<K, V>> {
-
-    @Override
-    public boolean isVisited(Node<K, V> node) {
-      // Not implemented
-      return false;
-    }
-
-    @Override
-    public void traverse(Node<K, V> node, Consumer<Node<K, V>> visitor) {
-      if (node == null) {
-        return;
-      }
-
-      traverse(node.left, visitor);
-      visitor.accept(node);
-      traverse(node.right, visitor);
     }
   }
 }
