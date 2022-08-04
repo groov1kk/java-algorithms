@@ -1,20 +1,36 @@
 package com.github.groov1kk.structures.tree;
 
-import java.util.function.Consumer;
+import java.util.Objects;
+
+import javax.annotation.Nullable;
 
 import com.github.groov1kk.structures.VisitedTraversal;
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;
+import com.github.groov1kk.structures.tree.algorithms.InorderTreeWalk;
+import com.github.groov1kk.structures.tree.algorithms.Node;
 
 public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
-  private final InorderTreeWalk traversal = new InorderTreeWalk();
+  private VisitedTraversal<Node<K, V>> traversal;
 
-  private Node<K, V> root;
+  private NodeImpl<K, V> root;
+
+  public RedBlackTree() {
+    this(new InorderTreeWalk<>());
+  }
+
+  public RedBlackTree(VisitedTraversal<Node<K, V>> traversal) {
+    this.traversal = Objects.requireNonNull(traversal);
+  }
+
+  public void setTraversal(VisitedTraversal<Node<K, V>> traversal) {
+    this.traversal = Objects.requireNonNull(traversal);
+  }
 
   @Override
   public V find(K key) {
-    Node<K, V> node = this.root;
+    NodeImpl<K, V> node = this.root;
     while (node != null) {
       if (node.key.compareTo(key) == 0) {
         return node.value;
@@ -30,9 +46,9 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     this.root.isRed = false;
   }
 
-  private Node<K, V> insert(Node<K, V> node, K key, V value) {
+  private NodeImpl<K, V> insert(NodeImpl<K, V> node, K key, V value) {
     if (node == null) {
-      return new Node<>(key, value, true);
+      return new NodeImpl<>(key, value, true);
     }
 
     if (node.key.compareTo(key) == 0) {
@@ -57,14 +73,14 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return node;
   }
 
-  private void flipColors(Node<K, V> node) {
+  private void flipColors(NodeImpl<K, V> node) {
     node.isRed = true;
     node.left.isRed = false;
     node.right.isRed = false;
   }
 
-  private Node<K, V> rotateRight(Node<K, V> node) {
-    Node<K, V> x = node.left;
+  private NodeImpl<K, V> rotateRight(NodeImpl<K, V> node) {
+    NodeImpl<K, V> x = node.left;
     node.left = x.right;
     x.right = node;
     x.isRed = node.isRed;
@@ -72,8 +88,8 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return x;
   }
 
-  private Node<K, V> rotateLeft(Node<K, V> node) {
-    Node<K, V> x = node.right;
+  private NodeImpl<K, V> rotateLeft(NodeImpl<K, V> node) {
+    NodeImpl<K, V> x = node.right;
     node.right = x.left;
     x.left = node;
     x.isRed = node.isRed;
@@ -81,7 +97,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return x;
   }
 
-  private boolean isRed(Node<K, V> node) {
+  private boolean isRed(NodeImpl<K, V> node) {
     return node != null && node.isRed;
   }
 
@@ -94,7 +110,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     this.root = remove(this.root, key);
   }
 
-  private Node<K, V> remove(Node<K, V> node, K key) {
+  private NodeImpl<K, V> remove(NodeImpl<K, V> node, K key) {
     if (node == null) {
       return null;
     }
@@ -118,7 +134,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
       }
 
       if (key.compareTo(node.key) == 0) {
-        Node<K, V> min = min(node.right);
+        NodeImpl<K, V> min = min(node.right);
         node.key = min.key;
         node.value = min.value;
         node.right = removeMin(node.right);
@@ -141,7 +157,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return node;
   }
 
-  private Node<K, V> moveRedRight(Node<K, V> node) {
+  private NodeImpl<K, V> moveRedRight(NodeImpl<K, V> node) {
     flipColors(node);
     if (isRed(node.left.left)) {
       node = rotateRight(node);
@@ -150,7 +166,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return node;
   }
 
-  private Node<K, V> moveRedLeft(Node<K, V> node) {
+  private NodeImpl<K, V> moveRedLeft(NodeImpl<K, V> node) {
     flipColors(node);
     if (isRed(node.left.left)) {
       node.right = rotateRight(node.right);
@@ -160,7 +176,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return node;
   }
 
-  private Node<K, V> removeMin(Node<K, V> node) {
+  private NodeImpl<K, V> removeMin(NodeImpl<K, V> node) {
     if (node.left == null) {
       return node.right;
     }
@@ -168,8 +184,8 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return node;
   }
 
-  private Node<K, V> min(Node<K, V> node) {
-    Node<K, V> temp = node;
+  private NodeImpl<K, V> min(NodeImpl<K, V> node) {
+    NodeImpl<K, V> temp = node;
     while (temp.left != null) {
       temp = temp.left;
     }
@@ -179,14 +195,14 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
   @Override
   public Iterable<K> keys() {
     Queue<K> queue = new ArrayQueue<>();
-    traversal.traverse(this.root, x -> queue.enqueue(x.key));
+    traversal.traverse(this.root, node -> queue.enqueue(node.key()));
     return queue;
   }
 
   @Override
   public Iterable<V> values() {
     Queue<V> queue = new ArrayQueue<>();
-    traversal.traverse(this.root, x -> queue.enqueue(x.value));
+    traversal.traverse(this.root, node -> queue.enqueue(node.value()));
     return queue;
   }
 
@@ -197,45 +213,47 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
     return builder.append("]").toString();
   }
 
-  private static class Node<K, V> {
+  private static class NodeImpl<K, V> implements Node<K, V> {
 
     private K key;
     private V value;
 
-    private Node<K, V> left;
-    private Node<K, V> right;
+    private NodeImpl<K, V> left;
+    private NodeImpl<K, V> right;
 
     private boolean isRed;
 
-    private Node(K key, V value, boolean isRed) {
+    private NodeImpl(K key, V value, boolean isRed) {
       this.key = key;
       this.value = value;
       this.isRed = isRed;
     }
 
     @Override
+    public K key() {
+      return key;
+    }
+
+    @Override
+    public V value() {
+      return value;
+    }
+
+    @Nullable
+    @Override
+    public Node<K, V> left() {
+      return left;
+    }
+
+    @Nullable
+    @Override
+    public Node<K, V> right() {
+      return right;
+    }
+
+    @Override
     public String toString() {
       return "[" + this.key + "=" + this.value + " " + (this.isRed ? "Red" : "Black") + "]";
-    }
-  }
-
-  private class InorderTreeWalk implements VisitedTraversal<Node<K, V>> {
-
-    @Override
-    public boolean isVisited(Node<K, V> node) {
-      // Not implemented
-      return false;
-    }
-
-    @Override
-    public void traverse(Node<K, V> node, Consumer<Node<K, V>> visitor) {
-      if (node == null) {
-        return;
-      }
-
-      traverse(node.left, visitor);
-      visitor.accept(node);
-      traverse(node.right, visitor);
     }
   }
 }
