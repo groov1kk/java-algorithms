@@ -1,6 +1,6 @@
 package com.github.groov1kk.sort;
 
-import static com.github.groov1kk.Utils.swap;
+import static com.github.groov1kk.utils.Utils.swap;
 
 /**
  * Quick sort algorithm. Uses Hoare partition scheme.

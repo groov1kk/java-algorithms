@@ -1,13 +1,13 @@
 package com.github.groov1kk.structures.graph.algorithms;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 
 import java.util.function.BiPredicate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.github.groov1kk.structures.graph.DirectedGraph;
 

@@ -1,9 +1,9 @@
 package com.github.groov1kk.search;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LinearSearchTest extends BaseSearchTest {
 
@@ -14,13 +14,13 @@ public class LinearSearchTest extends BaseSearchTest {
     int middle = ARRAY_LENGTH / 2;
     int value = array[middle];
 
-    Assert.assertThat(search.rank(array, value), is(middle));
+    assertThat(search.rank(array, value), is(middle));
   }
 
   @Test
   public void testLinearSearchValueNotPresent() {
     int value = TO_VALUE + 2; // More than upper bound;
 
-    Assert.assertThat(search.rank(array, value), is(-1));
+    assertThat(search.rank(array, value), is(-1));
   }
 }

@@ -1,15 +1,16 @@
 package com.github.groov1kk.search;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BinarySearchTest extends BaseSearchTest {
 
-  private final Search<Integer> search = new BinarySearch<>();;
+  private final Search<Integer> search = new BinarySearch<>();
+  ;
 
   @Test
   public void testBinarySearchValuePresent() {

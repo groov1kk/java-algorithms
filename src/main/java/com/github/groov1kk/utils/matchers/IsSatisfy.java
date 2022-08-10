@@ -1,4 +1,4 @@
-package com.github.groov1kk.matchers;
+package com.github.groov1kk.utils.matchers;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
@@ -29,7 +29,7 @@ public class IsSatisfy<T> extends TypeSafeDiagnosingMatcher<T> {
   @Override
   protected boolean matchesSafely(T item, Description mismatchDescription) {
     if (!condition.test(item)) {
-      mismatchDescription.appendText(conditionDescription).appendText(" was not satisfied");
+      mismatchDescription.appendText(conditionDescription).appendText(" has not been satisfied");
       return false;
     }
     return true;

@@ -1,6 +1,6 @@
 package com.github.groov1kk.sort;
 
-import com.github.groov1kk.Utils;
+import com.github.groov1kk.utils.Utils;
 
 /**
  * Radix sort algorithm. Uses LSD implementation.

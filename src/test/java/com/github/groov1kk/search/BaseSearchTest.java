@@ -2,7 +2,7 @@ package com.github.groov1kk.search;
 
 import java.util.Arrays;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.github.groov1kk.BaseTest;
 
@@ -14,7 +14,7 @@ abstract class BaseSearchTest extends BaseTest {
 
   protected Integer[] array;
 
-  @Before
+  @BeforeEach
   public void init() {
     this.array = boxed(distinctArray(ARRAY_LENGTH, FROM_VALUE, TO_VALUE));
   }

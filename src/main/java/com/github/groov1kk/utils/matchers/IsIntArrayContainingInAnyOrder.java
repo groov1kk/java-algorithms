@@ -1,4 +1,4 @@
-package com.github.groov1kk.matchers;
+package com.github.groov1kk.utils.matchers;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -43,18 +43,18 @@ public class IsIntArrayContainingInAnyOrder extends TypeSafeMatcher<int[]> {
   }
 
   /**
-   * Creates an order agnostic matcher for arrays that matches when each item in the examined array
-   * is logically equal to one item anywhere in the specified items. For a positive match, the
+   * Creates an order agnostic matcher for int arrays that matches when each item in the examined
+   * array is logically equal to one item anywhere in the specified items. For a positive match, the
    * examined array must be of the same length as the number of specified items. N.B. each of the
    * specified items will only be used once during a given examination, so be careful when
    * specifying items that may be equal to more than one entry in an examined array.
    *
-   * @param array the array that must equal the entries of an examined array, in any order
-   * @return int array matcher
+   * @param items The array that must equal the entries of an examined array, in any order
+   * @return Int array matcher
    */
-  public static Matcher<int[]> arrayContainingInAnyOrder(int[] array) {
+  public static Matcher<int[]> intArrayContainingInAnyOrder(int... items) {
     List<Matcher<? super Integer>> matchers = new ArrayList<>();
-    for (int item : array) {
+    for (int item : items) {
       matchers.add(equalTo(item));
     }
     return new IsIntArrayContainingInAnyOrder(matchers);

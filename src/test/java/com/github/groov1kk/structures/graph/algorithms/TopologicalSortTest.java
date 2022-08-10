@@ -1,10 +1,10 @@
 package com.github.groov1kk.structures.graph.algorithms;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.github.groov1kk.structures.graph.DirectedGraph;
 
@@ -32,7 +32,5 @@ public class TopologicalSortTest {
   }
 
   @Test
-  public void testTopologicalSortWithCycles() {
-
-  }
+  public void testTopologicalSortWithCycles() {}
 }

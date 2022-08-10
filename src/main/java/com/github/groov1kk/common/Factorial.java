@@ -1,6 +1,6 @@
 package com.github.groov1kk.common;
 
-import com.github.groov1kk.Checker;
+import com.github.groov1kk.utils.Checker;
 
 public final class Factorial {
 

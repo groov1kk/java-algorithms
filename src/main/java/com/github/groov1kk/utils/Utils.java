@@ -1,4 +1,4 @@
-package com.github.groov1kk;
+package com.github.groov1kk.utils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,23 +38,6 @@ public final class Utils {
     E temp = array[left];
     array[left] = array[right];
     array[right] = temp;
-  }
-
-  /**
-   * Verifies whether a given array is sorted in ascending order.
-   *
-   * @param array Array to check
-   * @return Is array sorted in ascending order
-   */
-  public static boolean isSortedAsc(int[] array) {
-    Objects.requireNonNull(array, "Array must not be null");
-
-    for (int i = 0; i < array.length - 1; i++) {
-      if (array[i] > array[i + 1]) {
-        return false;
-      }
-    }
-    return true;
   }
 
   /**

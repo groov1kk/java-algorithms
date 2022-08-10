@@ -1,6 +1,6 @@
 package com.github.groov1kk.common;
 
-import com.github.groov1kk.Utils;
+import com.github.groov1kk.utils.Utils;
 
 import javax.annotation.Nonnegative;
 import java.util.Arrays;

@@ -1,44 +1,29 @@
 package com.github.groov1kk.common;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.stream.Stream;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-@RunWith(Parameterized.class)
 public class DutchFlagTest {
 
-  private final int[] array;
-  private final int[] expected;
+  @ParameterizedTest
+  @MethodSource("data")
+  public void testDutchFlagProblem(int[] array, int[] expected, int mid) {
+    DutchFlag flag = DutchFlag.rearrange(array, mid);
 
-  private final int mid;
-
-  public DutchFlagTest(int[] array, int[] expected, int mid) {
-    this.array = array;
-    this.expected = expected;
-    this.mid = mid;
+    assertThat(flag.getArray(), is(expected));
+    assertThat(flag.middle(), is(mid));
   }
 
-  @Test
-  public void testDutchFlagProblem() {
-    DutchFlag flag = DutchFlag.rearrange(this.array, this.mid);
-
-    Assert.assertThat(flag.getArray(), is(this.expected));
-    Assert.assertThat(flag.middle(), is(this.mid));
-  }
-
-  @Parameterized.Parameters
-  public static Collection<Object[]> data() {
-    return Arrays.asList(
-        new Object[][] {
-          {new int[] {1, 0, 2}, new int[] {0, 1, 2}, 1},
-          {new int[] {2, 1, 1, 0, 2}, new int[] {0, 1, 1, 2, 2}, 1},
-          {new int[] {0, 0, 0, 2, 1}, new int[] {0, 0, 0, 1, 2}, 1}
-        });
+  public static Stream<Arguments> data() {
+    return Stream.of(
+        Arguments.of(new int[] {1, 0, 2}, new int[] {0, 1, 2}, 1),
+        Arguments.of(new int[] {2, 1, 1, 0, 2}, new int[] {0, 1, 1, 2, 2}, 1),
+        Arguments.of(new int[] {0, 0, 0, 2, 1}, new int[] {0, 0, 0, 1, 2}, 1));
   }
 }
