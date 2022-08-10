@@ -1,7 +1,7 @@
 package com.github.groov1kk.sort;
 
-import com.github.groov1kk.Checker;
-import com.github.groov1kk.Utils;
+import com.github.groov1kk.utils.Checker;
+import com.github.groov1kk.utils.Utils;
 
 import javax.annotation.Nonnegative;
 import java.util.ArrayList;

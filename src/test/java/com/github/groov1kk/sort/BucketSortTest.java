@@ -1,10 +1,10 @@
 package com.github.groov1kk.sort;
 
-import static com.github.groov1kk.matchers.IsIntArrayContainingInAnyOrder.arrayContainingInAnyOrder;
-import static com.github.groov1kk.matchers.IsIntArraySorted.naturalOrder;
+import static com.github.groov1kk.utils.matchers.IsIntArrayContainingInAnyOrder.intArrayContainingInAnyOrder;
+import static com.github.groov1kk.utils.matchers.IsIntArraySorted.naturalOrder;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BucketSortTest extends BaseSortTest {
 
@@ -15,8 +15,8 @@ public class BucketSortTest extends BaseSortTest {
     Sort sort = new BucketSort();
     sort.sort(array);
 
-    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
-    Assert.assertThat(array, naturalOrder());
+    assertThat(array, intArrayContainingInAnyOrder(clone));
+    assertThat(array, naturalOrder());
   }
 
   @Test
@@ -27,8 +27,8 @@ public class BucketSortTest extends BaseSortTest {
     Sort sort = new BucketSort(bucketRange);
     sort.sort(array);
 
-    Assert.assertThat(array, naturalOrder());
-    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
+    assertThat(array, naturalOrder());
+    assertThat(array, intArrayContainingInAnyOrder(clone));
   }
 
   @Test
@@ -40,7 +40,7 @@ public class BucketSortTest extends BaseSortTest {
     Sort sort = new BucketSort(bucketRange, bucketSort);
     sort.sort(array);
 
-    Assert.assertThat(array, naturalOrder());
-    Assert.assertThat(array, arrayContainingInAnyOrder(clone));
+    assertThat(array, naturalOrder());
+    assertThat(array, intArrayContainingInAnyOrder(clone));
   }
 }

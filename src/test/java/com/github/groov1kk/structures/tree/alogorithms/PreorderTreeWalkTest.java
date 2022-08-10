@@ -1,9 +1,9 @@
 package com.github.groov1kk.structures.tree.alogorithms;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.Assert.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;

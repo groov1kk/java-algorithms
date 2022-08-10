@@ -1,16 +1,16 @@
 package com.github.groov1kk.structures.graph.algorithms;
 
-import static com.github.groov1kk.matchers.IsSatisfy.satisfy;
+import static com.github.groov1kk.utils.matchers.IsSatisfy.satisfy;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Every.everyItem;
-import static org.junit.Assert.assertThat;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.github.groov1kk.structures.graph.BaseGraphTest;
 import com.github.groov1kk.structures.graph.Graph;

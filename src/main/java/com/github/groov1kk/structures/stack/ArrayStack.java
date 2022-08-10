@@ -1,6 +1,6 @@
 package com.github.groov1kk.structures.stack;
 
-import com.github.groov1kk.Checker;
+import com.github.groov1kk.utils.Checker;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nullable;

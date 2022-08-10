@@ -1,6 +1,6 @@
 package com.github.groov1kk.structures.queue;
 
-import com.github.groov1kk.Checker;
+import com.github.groov1kk.utils.Checker;
 
 import java.util.Iterator;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.github.groov1kk.matchers;
+package com.github.groov1kk.utils.matchers;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.Objects.requireNonNullElse;
