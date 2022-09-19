@@ -6,6 +6,20 @@ import com.github.groov1kk.structures.tree.algorithms.Node;
 
 public class BaseTreeAlgorithmsTest {
 
+  //        1
+  //       / \
+  //     2    3
+  //    / \
+  //   4   5
+  protected static Node<Integer, String> getTree() {
+    NodeImpl<Integer, String> node = new NodeImpl<>(1, "one");
+    node.setLeft(new NodeImpl<>(2, "two"));
+    node.setRight(new NodeImpl<>(3, "three"));
+    node.left().setLeft(new NodeImpl<>(4, "four"));
+    node.left().setRight(new NodeImpl<>(5, "five"));
+    return node;
+  }
+
   protected static class NodeImpl<K, V> implements Node<K, V> {
 
     private final K key;
@@ -31,7 +45,7 @@ public class BaseTreeAlgorithmsTest {
 
     @Nullable
     @Override
-    public Node<K, V> left() {
+    public NodeImpl<K, V> left() {
       return left;
     }
 
@@ -41,12 +55,17 @@ public class BaseTreeAlgorithmsTest {
 
     @Nullable
     @Override
-    public Node<K, V> right() {
+    public NodeImpl<K, V> right() {
       return right;
     }
 
     public void setRight(NodeImpl<K, V> right) {
       this.right = right;
+    }
+
+    @Override
+    public String toString() {
+      return "[" + key + ": " + value + "]";
     }
   }
 }

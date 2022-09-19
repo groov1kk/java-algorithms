@@ -9,8 +9,8 @@ import static org.hamcrest.Matchers.iterableWithSize;
 import org.junit.jupiter.api.Test;
 
 import com.github.groov1kk.BaseTest;
-import com.github.groov1kk.structures.tree.algorithms.PostorderTreeWalk;
-import com.github.groov1kk.structures.tree.algorithms.PreorderTreeWalk;
+import com.github.groov1kk.structures.tree.algorithms.PostorderTreeTraversal;
+import com.github.groov1kk.structures.tree.algorithms.PreorderTreeTraversal;
 
 public class BinarySearchTreeTest extends BaseTest {
 
@@ -51,7 +51,7 @@ public class BinarySearchTreeTest extends BaseTest {
 
   @Test
   public void testTraversalInjection() {
-    PostorderTreeWalk<Integer, String> postorderTreeWalk = new PostorderTreeWalk<>();
+    PostorderTreeTraversal<Integer, String> postorderTreeWalk = new PostorderTreeTraversal<>();
     BinarySearchTree<Integer, String> tree = new BinarySearchTree<>(postorderTreeWalk);
     tree.insert(2, "two");
     tree.insert(1, "one");
@@ -60,7 +60,7 @@ public class BinarySearchTreeTest extends BaseTest {
     assertThat(tree.keys(), contains(1, 3, 2));
     assertThat(tree.values(), contains("one", "three", "two"));
 
-    tree.setTraversal(new PreorderTreeWalk<>());
+    tree.setTraversal(new PreorderTreeTraversal<>());
 
     assertThat(tree.keys(), contains(2, 1, 3));
     assertThat(tree.values(), contains("two", "one", "three"));
