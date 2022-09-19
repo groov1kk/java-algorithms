@@ -8,8 +8,8 @@ import static org.hamcrest.Matchers.iterableWithSize;
 import org.junit.jupiter.api.Test;
 
 import com.github.groov1kk.BaseTest;
-import com.github.groov1kk.structures.tree.algorithms.PostorderTreeWalk;
-import com.github.groov1kk.structures.tree.algorithms.PreorderTreeWalk;
+import com.github.groov1kk.structures.tree.algorithms.PostorderTreeTraversal;
+import com.github.groov1kk.structures.tree.algorithms.PreorderTreeTraversal;
 
 public class RedBlackTreeTest extends BaseTest {
 
@@ -46,7 +46,7 @@ public class RedBlackTreeTest extends BaseTest {
 
   @Test
   public void testRbtTraversalInjection() {
-    PostorderTreeWalk<String, String> postorderTreeWalk = new PostorderTreeWalk<>();
+    PostorderTreeTraversal<String, String> postorderTreeWalk = new PostorderTreeTraversal<>();
     RedBlackTree<String, String> tree = new RedBlackTree<>(postorderTreeWalk);
     tree.insert("e", "E");
     tree.insert("a", "A");
@@ -57,7 +57,7 @@ public class RedBlackTreeTest extends BaseTest {
     assertThat(tree.keys(), contains("a", "c", "r", "s", "e"));
     assertThat(tree.values(), contains("A", "C", "R", "S", "E"));
 
-    tree.setTraversal(new PreorderTreeWalk<>());
+    tree.setTraversal(new PreorderTreeTraversal<>());
 
     assertThat(tree.keys(), contains("e", "c", "a", "s", "r"));
     assertThat(tree.values(), contains("E", "C", "A", "S", "R"));

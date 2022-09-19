@@ -1,10 +1,12 @@
 package com.github.groov1kk.common;
 
-import com.github.groov1kk.utils.Utils;
+import static com.github.groov1kk.utils.Utils.swap;
+import static java.util.Objects.checkIndex;
+import static java.util.Objects.requireNonNull;
+
+import java.util.Arrays;
 
 import javax.annotation.Nonnegative;
-import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * <a href="https://en.wikipedia.org/wiki/Dutch_national_flag_problem">Dutch national flag problem
@@ -49,7 +51,7 @@ public final class DutchFlag {
    * <p>Also this method applies {@code left} and {@code right} indexes of the given array, which
    * specify sub-array, where Dutch National Flag problem will be applied.
    *
-   * @param array Array to rearrange it's elements
+   * @param array Array to rearrange its elements
    * @param mid Element that will be considered as middle (white color).
    * @param left Index that represents a border between red and white elements
    * @param right Index that represents a border between white and blue elements
@@ -57,23 +59,21 @@ public final class DutchFlag {
    */
   public static DutchFlag rearrange(
       int[] array, int mid, @Nonnegative int left, @Nonnegative int right) {
-    Objects.requireNonNull(array, "Array must not be null");
-
-    int low = Objects.checkIndex(left, array.length);
-    int high = Objects.checkIndex(right, array.length);
+    requireNonNull(array, "Array must not be null");
+    checkIndex(left, array.length);
+    checkIndex(right, array.length);
 
     int x = left;
-
-    while (x <= high) {
+    while (x <= right) {
       if (array[x] < mid) {
-        Utils.swap(array, low++, x++);
+        swap(array, left++, x++);
       } else if (array[x] > mid) {
-        Utils.swap(array, x, high--);
+        swap(array, x, right--);
       } else {
         x++;
       }
     }
-    return new DutchFlag(array, mid, low, high);
+    return new DutchFlag(array, mid, left, right);
   }
 
   /**

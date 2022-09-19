@@ -7,23 +7,27 @@ import javax.annotation.Nullable;
 import com.github.groov1kk.structures.VisitedTraversal;
 import com.github.groov1kk.structures.queue.ArrayQueue;
 import com.github.groov1kk.structures.queue.Queue;
-import com.github.groov1kk.structures.tree.algorithms.InorderTreeWalk;
+import com.github.groov1kk.structures.tree.algorithms.InorderTreeTraversal;
 import com.github.groov1kk.structures.tree.algorithms.Node;
 
 public class RedBlackTree<K extends Comparable<K>, V> implements Tree<K, V> {
 
   private VisitedTraversal<Node<K, V>> traversal;
-
   private NodeImpl<K, V> root;
 
   public RedBlackTree() {
-    this(new InorderTreeWalk<>());
+    this(new InorderTreeTraversal<>());
   }
 
   public RedBlackTree(VisitedTraversal<Node<K, V>> traversal) {
     this.traversal = Objects.requireNonNull(traversal);
   }
 
+  /**
+   * Specifies tree traversal algorithm.
+   *
+   * @param traversal Tree traversal algorithm
+   */
   public void setTraversal(VisitedTraversal<Node<K, V>> traversal) {
     this.traversal = Objects.requireNonNull(traversal);
   }
