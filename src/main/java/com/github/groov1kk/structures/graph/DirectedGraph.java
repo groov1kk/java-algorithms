@@ -233,7 +233,15 @@ public class DirectedGraph<V> implements Graph<V> {
    */
   public static class Builder<V> {
 
-    private final DirectedGraph<V> graph = new DirectedGraph<>();
+    private final DirectedGraph<V> graph;
+
+    public Builder() {
+      graph = new DirectedGraph<>();
+    }
+
+    public Builder(BiPredicate<V, V> strategy) {
+      graph = new DirectedGraph<>(strategy);
+    }
 
     public DirectedGraph.Builder<V> addVertex(V vertex) {
       graph.addVertex(vertex);
