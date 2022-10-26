@@ -8,6 +8,12 @@ import com.github.groov1kk.structures.VisitedTraversal;
 import com.github.groov1kk.structures.queue.LinkedQueue;
 import com.github.groov1kk.structures.queue.Queue;
 
+/**
+ * Level-order (Breadth-first search or BFS) tree traversal.
+ *
+ * @param <K> Node's key type
+ * @param <V> Node's value type
+ */
 public final class LeverOrderTreeTraversal<K, V> implements VisitedTraversal<Node<K, V>> {
 
   @Override

@@ -6,6 +6,12 @@ import javax.annotation.Nullable;
 
 import com.github.groov1kk.structures.VisitedTraversal;
 
+/**
+ * In-order (LNR) tree traversal.
+ *
+ * @param <K> Node's key type
+ * @param <V> Node's value type
+ */
 public final class InorderTreeTraversal<K, V> implements VisitedTraversal<Node<K, V>> {
 
   @Override

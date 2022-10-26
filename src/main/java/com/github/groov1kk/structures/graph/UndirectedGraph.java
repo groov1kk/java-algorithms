@@ -25,9 +25,19 @@ import com.github.groov1kk.structures.graph.algorithms.DepthFirstSearch;
 @NotThreadSafe
 public class UndirectedGraph<V> implements Graph<V> {
 
-  private final Map<V, List<V>> adjacent = new HashMap<>();
+  private final Map<V, List<V>> adjacent;
 
   private int edges;
+
+  public UndirectedGraph() {
+    this.adjacent = new HashMap<>();
+  }
+
+  public UndirectedGraph(UndirectedGraph<V> graph) {
+    Objects.requireNonNull(graph, "Graph must not be null");
+    this.adjacent = new HashMap<>(graph.adjacent);
+    this.edges = graph.edges;
+  }
 
   @Override
   public final void addVertex(V vertex) {
@@ -160,7 +170,7 @@ public class UndirectedGraph<V> implements Graph<V> {
     }
 
     public UndirectedGraph<V> build() {
-      return graph;
+      return new UndirectedGraph<>(graph);
     }
   }
 }

@@ -28,7 +28,7 @@ import com.github.groov1kk.structures.graph.algorithms.TopologicalSort;
 @NotThreadSafe
 public class DirectedGraph<V> implements Graph<V> {
 
-  private final Map<V, List<V>> adjacent = new HashMap<>();
+  private final Map<V, List<V>> adjacent;
   private final BiPredicate<V, V> strategy;
 
   private int edges;
@@ -39,6 +39,14 @@ public class DirectedGraph<V> implements Graph<V> {
 
   public DirectedGraph(BiPredicate<V, V> strategy) {
     this.strategy = Objects.requireNonNull(strategy);
+    this.adjacent = new HashMap<>();
+  }
+
+  public DirectedGraph(DirectedGraph<V> graph) {
+    Objects.requireNonNull(graph, "Graph must not be null");
+    this.adjacent = new HashMap<>(graph.adjacent);
+    this.strategy = graph.strategy;
+    this.edges = graph.edges;
   }
 
   @Override
@@ -225,7 +233,15 @@ public class DirectedGraph<V> implements Graph<V> {
    */
   public static class Builder<V> {
 
-    private final DirectedGraph<V> graph = new DirectedGraph<>();
+    private final DirectedGraph<V> graph;
+
+    public Builder() {
+      graph = new DirectedGraph<>();
+    }
+
+    public Builder(BiPredicate<V, V> strategy) {
+      graph = new DirectedGraph<>(strategy);
+    }
 
     public DirectedGraph.Builder<V> addVertex(V vertex) {
       graph.addVertex(vertex);
@@ -238,7 +254,7 @@ public class DirectedGraph<V> implements Graph<V> {
     }
 
     public DirectedGraph<V> build() {
-      return graph;
+      return new DirectedGraph<>(graph);
     }
   }
 }
