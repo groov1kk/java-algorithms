@@ -10,11 +10,13 @@ import static org.hamcrest.Matchers.arrayContaining;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
+import com.github.groov1kk.extensions.RandomArray;
+import com.github.groov1kk.extensions.RandomArrayExtension;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import com.github.groov1kk.BaseTest;
-
-public class UtilsTest extends BaseTest {
+@ExtendWith(RandomArrayExtension.class)
+public class UtilsTest {
 
   @Test
   public void testMax() {
@@ -40,7 +42,7 @@ public class UtilsTest extends BaseTest {
   }
 
   @Test
-  public void testSwapComparables() {
+  public void testSwapComparable() {
     @SuppressWarnings("unchecked")
     Comparable<Integer>[] array = new Comparable[] {1, 2, 3};
 
@@ -50,9 +52,7 @@ public class UtilsTest extends BaseTest {
   }
 
   @Test
-  public void testShuffleArray() {
-    int[] array = array(10, 1, 10);
-
+  public void testShuffleArray(@RandomArray(length = 10, from = 1, to = 10) int[] array) {
     assertThat(shuffle(array.clone()), is(not(intArrayContaining(array))));
   }
 }

@@ -6,10 +6,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import com.github.groov1kk.extensions.RandomArray;
+
 public class QuickSort3WayPartitionTest extends BaseSortTest {
 
   @Test
-  public void testQuickSort() {
+  public void testQuickSort(@RandomArray int[] array) {
     int[] clone = array.clone();
 
     Sort sort = new QuickSort3WayPartition();

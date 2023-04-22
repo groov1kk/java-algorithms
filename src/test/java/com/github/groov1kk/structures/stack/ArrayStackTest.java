@@ -9,9 +9,7 @@ import static org.hamcrest.Matchers.iterableWithSize;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.groov1kk.BaseTest;
-
-public class ArrayStackTest extends BaseTest {
+public class ArrayStackTest {
 
   @Test
   public void testEmptyStack() {

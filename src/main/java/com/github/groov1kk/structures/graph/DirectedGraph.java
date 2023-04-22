@@ -17,7 +17,7 @@ import com.github.groov1kk.structures.graph.algorithms.DirectedCycle;
 import com.github.groov1kk.structures.graph.algorithms.TopologicalSort;
 
 /**
- * Directed graph implementation. Does not apply {@code null} elements. Supports cycles and parallel
+ * Directed graph implementation. Does not apply {@code null} elements. It supports cycles and parallel
  * edges.
  *
  * <p>Notice, that {@link #addEdge(Object, Object)} method creates additional vertexes, if they

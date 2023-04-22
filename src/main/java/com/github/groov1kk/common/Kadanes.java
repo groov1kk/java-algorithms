@@ -8,7 +8,9 @@ package com.github.groov1kk.common;
  */
 public final class Kadanes {
 
-  public int maxSubArray(int[] array) {
+  private Kadanes() {}
+
+  public static int maxSubArray(int[] array) {
     int maxEndingHere = array[0];
     int maxSoFar = array[0];
 

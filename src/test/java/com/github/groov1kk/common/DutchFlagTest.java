@@ -1,10 +1,10 @@
 package com.github.groov1kk.common;
 
+import static com.github.groov1kk.utils.Utils.intArray;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import java.util.stream.Stream;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,8 +22,8 @@ public class DutchFlagTest {
 
   public static Stream<Arguments> data() {
     return Stream.of(
-        Arguments.of(new int[] {1, 0, 2}, new int[] {0, 1, 2}, 1),
-        Arguments.of(new int[] {2, 1, 1, 0, 2}, new int[] {0, 1, 1, 2, 2}, 1),
-        Arguments.of(new int[] {0, 0, 0, 2, 1}, new int[] {0, 0, 0, 1, 2}, 1));
+        Arguments.of(intArray(1, 0, 2), intArray(0, 1, 2), 1),
+        Arguments.of(intArray(2, 1, 1, 0, 2), intArray(0, 1, 1, 2, 2), 1),
+        Arguments.of(intArray(0, 0, 0, 2, 1), intArray(0, 0, 0, 1, 2), 1));
   }
 }

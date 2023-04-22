@@ -9,9 +9,7 @@ import static org.hamcrest.Matchers.iterableWithSize;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.groov1kk.BaseTest;
-
-public class LinkedQueueTest extends BaseTest {
+public class LinkedQueueTest {
 
   @Test
   public void testEmptyQueue() {

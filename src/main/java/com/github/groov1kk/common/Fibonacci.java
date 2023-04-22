@@ -9,7 +9,9 @@ import com.github.groov1kk.utils.Checker;
  */
 public final class Fibonacci {
 
-  public int fibonacci(int n) {
+  private Fibonacci() {}
+
+  public static int calculate(int n) {
     Checker.requireNonNegative(n, "Number must be positive");
 
     if (n <= 1) {
