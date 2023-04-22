@@ -30,10 +30,10 @@ public class RandomArrayExtension implements ParameterResolver {
             .getStore(ExtensionContext.Namespace.GLOBAL)
             .getOrComputeIfAbsent(Random.class);
 
-    Class<?> type = parameter.getType();
     RandomArray randomArray = parameter.getAnnotation(RandomArray.class);
     checkRandomArray(randomArray);
 
+    Class<?> type = parameter.getType();
     if (int[].class.equals(type)) {
       return intStream(random, randomArray).toArray();
     }
@@ -48,13 +48,12 @@ public class RandomArrayExtension implements ParameterResolver {
   private static void checkRandomArray(RandomArray randomArray) {
     Preconditions.condition(randomArray.length() >= 0, "Length must be greater than 0");
     Preconditions.condition(
-        randomArray.from() <= randomArray.to(), "From value must be less than To value");
+        randomArray.from() <= randomArray.to(),
+        "Value 'From' must be the less than the value 'To'");
   }
 
   private static IntStream intStream(Random random, RandomArray randomArray) {
-    IntStream intStream =
-        random.ints(randomArray.from(), randomArray.to()).limit(randomArray.length());
-
-    return randomArray.distinct() ? intStream.distinct() : intStream;
+    IntStream ints = random.ints(randomArray.from(), randomArray.to()).limit(randomArray.length());
+    return randomArray.distinct() ? ints.distinct() : ints;
   }
 }
