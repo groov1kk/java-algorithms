@@ -4,7 +4,9 @@ import com.github.groov1kk.utils.Checker;
 
 public final class Factorial {
 
-  public int factorial(int n) {
+  private Factorial() {}
+
+  public static int calculate(int n) {
     Checker.requireNonNegative(n, "Number must be positive");
 
     if (n == 0) {

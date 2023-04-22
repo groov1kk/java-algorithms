@@ -4,12 +4,13 @@ import static com.github.groov1kk.utils.matchers.IsIntArrayContainingInAnyOrder.
 import static com.github.groov1kk.utils.matchers.IsIntArraySorted.naturalOrder;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import com.github.groov1kk.extensions.RandomArray;
 import org.junit.jupiter.api.Test;
 
 public class BubbleSortTest extends BaseSortTest {
 
   @Test
-  public void testBubbleSort() {
+  public void testBubbleSort(@RandomArray int[] array) {
     int[] clone = array.clone();
 
     Sort sort = new BubbleSort();

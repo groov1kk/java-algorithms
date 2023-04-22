@@ -79,7 +79,7 @@ public interface Graph<V> extends Iterable<V> {
   int edges();
 
   /**
-   * Breadth-First-Search algorithm. Uses the given {@code visitor} to handle each vertexes which it
+   * Breadth-First-Search algorithm. Uses the given {@code visitor} to handle each vertex which it
    * will find during the traverse.
    *
    * @param node Node from this algorithm will start
@@ -92,7 +92,7 @@ public interface Graph<V> extends Iterable<V> {
   }
 
   /**
-   * Depth-First-Search algorithm. Uses the given {@code visitor} to handle each vertexes which he
+   * Depth-First-Search algorithm. Uses the given {@code visitor} to handle each vertex which he
    * will find during the traverse.
    *
    * @param node Node from this algorithm will start

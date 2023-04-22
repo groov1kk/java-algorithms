@@ -7,9 +7,7 @@ import static org.hamcrest.Matchers.iterableWithSize;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.groov1kk.BaseTest;
-
-public class LinkedDequeueTest extends BaseTest {
+public class LinkedDequeueTest {
 
   @Test
   public void testEmptyDequeue() {

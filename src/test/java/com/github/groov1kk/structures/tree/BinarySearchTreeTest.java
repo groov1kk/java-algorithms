@@ -6,13 +6,11 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.iterableWithSize;
 
-import org.junit.jupiter.api.Test;
-
-import com.github.groov1kk.BaseTest;
 import com.github.groov1kk.structures.tree.algorithms.PostorderTreeTraversal;
 import com.github.groov1kk.structures.tree.algorithms.PreorderTreeTraversal;
+import org.junit.jupiter.api.Test;
 
-public class BinarySearchTreeTest extends BaseTest {
+public class BinarySearchTreeTest {
 
   @Test
   public void testBstInsert() {
