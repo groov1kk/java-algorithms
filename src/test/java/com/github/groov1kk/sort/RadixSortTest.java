@@ -6,10 +6,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import com.github.groov1kk.extensions.RandomArray;
+
 public class RadixSortTest extends BaseSortTest {
 
   @Test
-  public void testRadixSort() {
+  public void testRadixSort(@RandomArray int[] array) {
     int[] clone = array.clone();
 
     Sort radixSort = new RadixSort();

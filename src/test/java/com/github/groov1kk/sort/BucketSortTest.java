@@ -4,9 +4,16 @@ import static com.github.groov1kk.utils.matchers.IsIntArrayContainingInAnyOrder.
 import static com.github.groov1kk.utils.matchers.IsIntArraySorted.naturalOrder;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import com.github.groov1kk.extensions.RandomArray;
 import org.junit.jupiter.api.Test;
 
 public class BucketSortTest extends BaseSortTest {
+
+  private final int[] array;
+
+  public BucketSortTest(@RandomArray int[] array) {
+    this.array = array;
+  }
 
   @Test
   public void testBucketSort() {

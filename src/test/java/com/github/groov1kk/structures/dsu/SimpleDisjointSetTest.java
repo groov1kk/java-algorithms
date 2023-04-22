@@ -5,9 +5,7 @@ import static org.hamcrest.Matchers.is;
 
 import org.junit.jupiter.api.Test;
 
-import com.github.groov1kk.BaseTest;
-
-public class SimpleDisjointSetTest extends BaseTest {
+public class SimpleDisjointSetTest {
 
   @Test
   public void testAdd() {

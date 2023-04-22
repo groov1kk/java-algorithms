@@ -1,7 +1,5 @@
 package com.github.groov1kk.utils;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -91,5 +89,15 @@ public final class Utils {
       swap(array, i, random.nextInt(i + 1));
     }
     return array;
+  }
+
+  /**
+   * Converts integer varargs into integer array.
+   *
+   * @param values integer values to convert
+   * @return int array
+   */
+  public static int[] intArray(int... values) {
+    return values;
   }
 }

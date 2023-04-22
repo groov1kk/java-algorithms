@@ -11,7 +11,8 @@ This project contains the following algorithm's implementations:
     * [Dutch flag](https://en.wikipedia.org/wiki/Dutch_national_flag_problem)
     * [Factorial](https://en.wikipedia.org/wiki/Factorial)
     * [Fibonacci](https://en.wikipedia.org/wiki/Fibonacci)
-    * [Maximum subarray problem (Kadane's algorithm)](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
+    * [Heap's algorithm](https://en.wikipedia.org/wiki/Heap%27s_algorithm)
+    * [Maximum sub-array problem (Kadane's algorithm)](https://en.wikipedia.org/wiki/Maximum_subarray_problem)
     * [3SUM](https://en.wikipedia.org/wiki/3SUM)
 * Search
     * [Linear](https://en.wikipedia.org/wiki/Linear_search)

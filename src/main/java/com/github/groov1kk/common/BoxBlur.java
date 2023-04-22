@@ -9,7 +9,9 @@ public final class BoxBlur {
 
   private static final int PIXEL_SIZE = 3;
 
-  public int[][] boxBlur(int[][] image) {
+  private BoxBlur() {}
+
+  public static int[][] compute(int[][] image) {
     int[][] result = new int[image.length - 2][image[0].length - 2];
 
     for (int i = 0; i < image.length - 2; i++) {
@@ -28,7 +30,7 @@ public final class BoxBlur {
    * @param y Upper left Y-axis index of matrix
    * @return Average value of all pixels
    */
-  private int calculateSum(int[][] image, int x, int y) {
+  private static int calculateSum(int[][] image, int x, int y) {
     int sum = 0;
     for (int i = y; i < y + PIXEL_SIZE; i++) {
       for (int j = x; j < x + PIXEL_SIZE; j++) {

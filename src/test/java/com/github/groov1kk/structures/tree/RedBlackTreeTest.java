@@ -5,13 +5,11 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.iterableWithSize;
 
-import org.junit.jupiter.api.Test;
-
-import com.github.groov1kk.BaseTest;
 import com.github.groov1kk.structures.tree.algorithms.PostorderTreeTraversal;
 import com.github.groov1kk.structures.tree.algorithms.PreorderTreeTraversal;
+import org.junit.jupiter.api.Test;
 
-public class RedBlackTreeTest extends BaseTest {
+public class RedBlackTreeTest {
 
   @Test
   public void testRbtInsert() {

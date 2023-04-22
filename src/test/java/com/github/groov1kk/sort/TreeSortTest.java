@@ -6,10 +6,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import com.github.groov1kk.extensions.RandomArray;
+
 public class TreeSortTest extends BaseSortTest {
 
   @Test
-  public void testTreeSort() {
+  public void testTreeSort(@RandomArray int[] array) {
     int[] clone = array.clone();
 
     Sort sort = new TreeSort();
