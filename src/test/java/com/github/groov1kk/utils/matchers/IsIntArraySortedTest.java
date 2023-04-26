@@ -1,5 +1,6 @@
 package com.github.groov1kk.utils.matchers;
 
+import static com.github.groov1kk.utils.Utils.intArray;
 import static com.github.groov1kk.utils.matchers.IsIntArraySorted.naturalOrder;
 import static com.github.groov1kk.utils.matchers.IsIntArraySorted.reverseOrder;
 import static com.github.groov1kk.utils.matchers.IsIntArraySorted.sorted;
@@ -11,17 +12,17 @@ public class IsIntArraySortedTest extends BaseMatchersTest {
 
   @Test
   void testIntArrayShouldBeSorted() {
-    assertMatches(sorted(Integer::compareTo), new int[] {1, 2, 3});
+    assertMatches(sorted(Integer::compareTo), intArray(1, 2, 3));
   }
 
   @Test
   void testIntArrayShouldBeSortedInNaturalOrder() {
-    assertMatches(naturalOrder(), new int[] {1, 2, 3});
+    assertMatches(naturalOrder(), intArray(1, 2, 3));
   }
 
   @Test
   void testIntArrayShouldBeSortedInReverseOrder() {
-    assertMatches(reverseOrder(), new int[] {3, 2, 1});
+    assertMatches(reverseOrder(), intArray(3, 2, 1));
   }
 
   @Test

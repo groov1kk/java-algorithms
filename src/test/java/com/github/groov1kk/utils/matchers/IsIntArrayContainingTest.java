@@ -1,9 +1,9 @@
 package com.github.groov1kk.utils.matchers;
 
+import static com.github.groov1kk.utils.Utils.intArray;
 import static com.github.groov1kk.utils.matchers.IsIntArrayContaining.intArrayContaining;
 
 import java.util.stream.Stream;
-
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +14,7 @@ public class IsIntArrayContainingTest extends BaseMatchersTest {
 
   @Test
   void testIntArrayShouldMatch() {
-    assertMatches(intArrayContaining(1, 2, 3), new int[] {1, 2, 3});
+    assertMatches(intArrayContaining(1, 2, 3), intArray(1, 2, 3));
   }
 
   @ParameterizedTest
@@ -26,8 +26,8 @@ public class IsIntArrayContainingTest extends BaseMatchersTest {
 
   static Stream<Arguments> data() {
     return Stream.of(
-        Arguments.of(intArrayContaining(1, 2, 3), new int[] {1, 2}, "no item was <3>"),
-        Arguments.of(intArrayContaining(1, 2, 3), new int[] {1, 2, 3, 4}, "not matched: <4>"),
-        Arguments.of(intArrayContaining(1, 2, 3), new int[] {3, 1, 2}, "item 0: was <3>"));
+        Arguments.of(intArrayContaining(1, 2, 3), intArray(1, 2), "no item was <3>"),
+        Arguments.of(intArrayContaining(1, 2, 3), intArray(1, 2, 3, 4), "not matched: <4>"),
+        Arguments.of(intArrayContaining(1, 2, 3), intArray(3, 1, 2), "item 0: was <3>"));
   }
 }

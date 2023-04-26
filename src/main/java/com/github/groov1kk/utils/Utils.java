@@ -92,7 +92,7 @@ public final class Utils {
   }
 
   /**
-   * Converts integer varargs into integer array.
+   * Converts integer varargs into an array of integers.
    *
    * @param values integer values to convert
    * @return int array
