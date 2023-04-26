@@ -20,22 +20,29 @@ public class BinarySearchTest extends BaseSearchTest {
   }
 
   @Test
-  public void testBinarySearchValuePresent() {
+  public void testBinarySearchMiddleValue() {
     Arrays.sort(array);
 
-    // Middle element
     int position = array.length / 2;
     int value = array[position];
     assertThat(search.rank(array, value), is(position));
+  }
 
-    // Left from middle
-    position = array.length / 2 - 1;
-    value = array[position];
+  @Test
+  public void testBinarySearchLeftValue() {
+    Arrays.sort(array);
+
+    int position = array.length / 2 - 1;
+    int value = array[position];
     assertThat(search.rank(array, value), is(position));
+  }
 
-    // Right from middle
-    position = array.length / 2 + 1;
-    value = array[position];
+  @Test
+  public void testBinarySearchRightValue() {
+    Arrays.sort(array);
+
+    int position = array.length / 2 + 1;
+    int value = array[position];
     assertThat(search.rank(array, value), is(position));
   }
 

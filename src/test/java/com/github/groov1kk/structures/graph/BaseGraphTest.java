@@ -32,7 +32,7 @@ public abstract class BaseGraphTest {
    *
    * @return undirected graph
    */
-  protected Graph<Integer> undirectedGraph() {
+  protected static Graph<Integer> undirectedGraph() {
     return new UndirectedGraph.Builder<Integer>()
         .addEdge(1, 2)
         .addEdge(1, 3)
@@ -50,7 +50,7 @@ public abstract class BaseGraphTest {
    *
    * @return directed graph
    */
-  protected Graph<Integer> directedGraph() {
+  protected static Graph<Integer> directedGraph() {
     return new DirectedGraph.Builder<Integer>()
         .addEdge(1, 2)
         .addEdge(1, 3)

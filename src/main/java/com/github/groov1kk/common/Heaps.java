@@ -32,6 +32,7 @@ public final class Heaps {
     }
 
     rearrange(result, array, k - 1);
+
     for (int i = 0; i < k - 1; i++) {
       if (k % 2 == 0) {
         swap(array, i, k - 1);
